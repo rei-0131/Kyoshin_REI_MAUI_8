@@ -16,26 +16,26 @@ public partial class SettingPage : ContentPage
 		ps_entry.Text = Geoloc.ps_cal.ToString();
 		log_entry.Text = Geoloc.get_log.ToString();
 		back_op.IsToggled = Geoloc.back_op;
-		var hour_traffic = 3600 / (Geoloc.eew_in / 1000) * 550;
+		var hour_traffic = 3600 / (Geoloc.realtime_in / 1000) * 550;
 		if (hour_traffic < 1024)
 		{
 			//B
-			traffic_label.Text = hour_traffic.ToString() + "B/h";
+			traffic_label.Text = hour_traffic.ToString() + "B/h ";
 		}
 		else if (hour_traffic >= 1024 && hour_traffic < 1048576)
 		{
             //KB
-            traffic_label.Text = (hour_traffic / 1024).ToString("0.000") + "KB/h";
+            traffic_label.Text = (hour_traffic / 1024).ToString("0.000") + "KB/h ";
         }
 		else if (hour_traffic >= 1048576 && hour_traffic < 1073741824)
 		{
             //MB
-            traffic_label.Text = (hour_traffic / 1024 / 1024).ToString("0.000") + "MB/h";
+            traffic_label.Text = (hour_traffic / 1024 / 1024).ToString("0.000") + "MB/h ";
         }
 		else
 		{
             //GB
-            traffic_label.Text = (hour_traffic / 1024 / 1024 / 1024).ToString("0.000") + "GB/h";
+            traffic_label.Text = (hour_traffic / 1024 / 1024 / 1024).ToString("0.000") + "GB/h ";
         }
 	}
 
@@ -81,22 +81,22 @@ public partial class SettingPage : ContentPage
             if (hour_traffic < 1024)
             {
                 //B
-                traffic_label.Text = hour_traffic.ToString() + "B/h";
+                traffic_label.Text = hour_traffic.ToString() + "B/h ";
             }
             else if (hour_traffic >= 1024 && hour_traffic < 1048576)
             {
                 //KB
-                traffic_label.Text = (hour_traffic / 1024).ToString("0.000") + "KB/h";
+                traffic_label.Text = (hour_traffic / 1024).ToString("0.000") + "KB/h ";
             }
             else if (hour_traffic >= 1048576 && hour_traffic < 1073741824)
             {
                 //MB
-                traffic_label.Text = (hour_traffic / 1024 / 1024).ToString("0.000") + "MB/h";
+                traffic_label.Text = (hour_traffic / 1024 / 1024).ToString("0.000") + "MB/h ";
             }
             else
             {
                 //GB
-                traffic_label.Text = (hour_traffic / 1024 / 1024 / 1024).ToString("0.000") + "GB/h";
+                traffic_label.Text = (hour_traffic / 1024 / 1024 / 1024).ToString("0.000") + "GB/h ";
             }
             message_setting.Text = "Ý’è•ÏX¬Œ÷";
 			if(Geoloc.back_op)

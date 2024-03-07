@@ -34,13 +34,9 @@ namespace Kyoshin_REI_MAUI_8
     {
         Dictionary<string, List<string>> Quake_Dict = new Dictionary<string, List<string>>();
         Dictionary<string, List<string>> Quake_tmp = new Dictionary<string, List<string>>();
-        //35.29881;
-        //136.80164;
-        //public static double my_lat = 39.638445;
-        //public static double my_lon = 141.941299;
 
-        public static double my_lat = 35.302141;
-        public static double my_lon = 136.797096;
+        public static double my_lat = 35;
+        public static double my_lon = 136;
         public static int p_seconds = 999;
         public static int s_seconds = 999;
         public static List<int> nums = new List<int>();
@@ -609,7 +605,6 @@ namespace Kyoshin_REI_MAUI_8
                 flo_time.Text = ex.ToString();
                 System.Diagnostics.Debug.WriteLine(ex);
             }
-            System.Diagnostics.Debug.WriteLine(nearestCoordinate.X + " " + nearestCoordinate.Y);
 
             while (true)
             {

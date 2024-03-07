@@ -70,13 +70,14 @@ namespace Kyoshin_REI_MAUI_8
                         {
                             Id = "BackGround_None_Notice",
                             Name = "BackGround_None_Notice",
-                            Description = "General",
+                            Description = "General"
                         });
                         android.AddChannel(new NotificationChannelRequest
                         {
-                            Id = "BackGround_Quake_Notice",
-                            Name = "BackGround_Quake_Notice",
-                            Description = "Special"
+                            Id = "BackGround_Warning_Notice",
+                            Name = "BackGround_Warning_Notice",
+                            Description = "Special",
+                            Sound = "early_warning"
                         });
                         android.AddChannel(new NotificationChannelRequest
                         {
@@ -248,7 +249,7 @@ namespace Kyoshin_REI_MAUI_8
                                 NotificationId = 100,
                                 Title = "緊急地震速報が発表されました",
                                 Subtitle = $"{DateTime.ParseExact(result_eew.Data.RequestTime, "yyyyMMddHHmmss", null).ToString("yyyy/MM/dd HH:mm:ss")}",
-                                Description = $"{result_eew.Data.AlertFlag} {result_eew.Data.RegionName} {result_eew.Data.MagunitudeString}",
+                                Description = $"{result_eew.Data.AlertFlag} {result_eew.Data.ReportNum} {result_eew.Data.RegionName} {result_eew.Data.MagunitudeString}",
                                 CategoryType = NotificationCategoryType.Status,
                                 Android =
                                 {
@@ -256,7 +257,7 @@ namespace Kyoshin_REI_MAUI_8
                                     {
                                         ResourceName = "notify_icon"
                                     },
-                                    ChannelId = "BackGround_Quake_Notice"
+                                    ChannelId = "BackGround_Warning_Notice"
                                 }
                             };
                             if (result_eew.Data.AlertFlag == "警報")
@@ -274,6 +275,7 @@ namespace Kyoshin_REI_MAUI_8
                         Title = "緊急地震速報は発表されていません。",
                         Subtitle = $"{DateTime.ParseExact(result_eew.Data.RequestTime, "yyyyMMddHHmmss", null).ToString("yyyy/MM/dd HH:mm:ss")}",
                         Description = "",
+                        //Sound = DeviceInfo.Platform == DevicePlatform.Android ? "early_warning" : "early_warning.mp3",
                         CategoryType = NotificationCategoryType.Status,
                         Android =
                         {
