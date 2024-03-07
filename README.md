@@ -1,0 +1,1 @@
+KyoshinMonitorLibを使用しています。
