@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Kyoshin_REI_MAUI_8.TsunamiPage"
+             BackgroundColor="#1f2025">
+    <ScrollView>
+        <VerticalStackLayout 
+        Spacing="25" 
+        Padding="30,0" 
+        VerticalOptions="Start">
+
+            <ListView x:Name="tsunamilist"
+                  IsPullToRefreshEnabled="True"
+                  CachingStrategy="RecycleElement">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell ImageSource="{Binding Tsunami_Image}"
+                                   Text="{Binding Tsunami_title}"
+                                   TextColor="#ffffff"
+                                   Detail="{Binding Tsunami_strings}"
+                                   DetailColor="#ffffff"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

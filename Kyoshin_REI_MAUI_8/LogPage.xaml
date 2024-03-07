@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Kyoshin_REI_MAUI_8.LogPage"
+             BackgroundColor="#1f2025">
+    <ScrollView>
+        <VerticalStackLayout 
+            Spacing="25" 
+            Padding="30,0" 
+            VerticalOptions="Start">
+
+            <ListView x:Name="loglist"
+                      ItemSelected="loglist_ItemSelected"
+                      IsPullToRefreshEnabled="True"
+                      CachingStrategy="RecycleElement">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell ImageSource="{Binding Log_Image}"
+                                   Text="{Binding ID}"
+                                   TextColor="#ffffff"
+                                   Detail="{Binding Log_strings}"
+                                   DetailColor="#ffffff"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

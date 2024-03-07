@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Kyoshin_REI_MAUI_8.MainPage"
+             BackgroundColor="#1f2025">
+
+    <ScrollView>
+        <StackLayout
+            Orientation="Vertical">
+            
+            <Label x:Name="EEW_Status"
+                   TextColor="#ffffff"
+                   FontSize="20"
+                   Text="緊急地震速報は発表されていません"
+                   HorizontalOptions="Center"/>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="EEW_Level"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       TextColor="#ffffff"
+                       Text=""
+                       HorizontalOptions="Center"/>
+                <Label x:Name="mag"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       TextColor="#ffffff"
+                       Text=""
+                       HorizontalOptions="Center"/>
+                <Label x:Name="region_point"
+                       Grid.Row="0"
+                       Grid.Column="2"
+                       TextColor="#ffffff"
+                       Text=""
+                       HorizontalOptions="Center"/>
+                <Label x:Name="report_num"
+                       Grid.Row="0"
+                       Grid.Column="3"
+                       TextColor="#ffffff"
+                       Text=""
+                       HorizontalOptions="Center"/>
+            </Grid>
+
+            <Image x:Name="max_intensity"
+                   HorizontalOptions="Start"
+                   HeightRequest="100"
+                   WidthRequest="100"/>
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   TextColor="#ffffff"
+                   Text="P波到着まで"
+                   FontSize="35"/>
+            <Label x:Name="p_second"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   TextColor="#ffffff"
+                   Text="--秒"
+                   HorizontalOptions="End"
+                   FontSize="70"/>
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   TextColor="#ffffff"
+                   Text="S波到着まで"
+                   FontSize="35"/>
+            <Label x:Name="s_second"
+                   TextColor="#ffffff"
+                   Text="--秒"
+                   HorizontalOptions="End"
+                   FontSize="70"/>
+
+            <Label x:Name="loc_Status"
+                   TextColor="#ffffff"
+                   HorizontalOptions="Center"/>
+
+            <Button x:Name="Loc_button"
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    BackgroundColor="#ff00b4ff"
+                    TextColor="#ffffff"
+                    Text="位置情報再取得"
+                    HorizontalOptions="Center"
+                    Clicked="Loc_button_click"
+                    WidthRequest="350"/>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="open_point"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       TextColor="#ffffff"
+                       HorizontalOptions="Center"
+                       Text="xxxx"/>
+                <Label x:Name="point_label"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       TextColor="#ffffff"
+                       HorizontalOptions="Center"
+                       Text="xxxxxx"/>
+            </Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="intensity_flo"
+                       TextColor="#ffffff"
+                       FontSize="85"
+                       Text="xx"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       HorizontalOptions="Center"/>
+                <Image x:Name="point_sindo"
+                       HeightRequest="90"
+                       WidthRequest="90"
+                       Grid.Row="0"
+                       Grid.Column="2"
+                       HorizontalOptions="End"/>
+            </Grid>
+
+            <Label x:Name="intensity_bar"
+                   HorizontalOptions="Center"
+                   WidthRequest="380"
+                   HeightRequest="12"/>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="get_time"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       TextColor="#ffffff"
+                       Text=""
+                       HorizontalOptions="Center"/>
+
+                <Label x:Name="flo_time"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       TextColor="#ffffff"
+                       Text=""
+                       HorizontalOptions="Center"/>
+            </Grid>
+            
+            <Label x:Name="now_time"
+                   TextColor="#ffffff"
+                   Text=""
+                   HorizontalOptions="Center"/>
+            <Button x:Name="now_button"
+                    BackgroundColor="#ff00b4ff"
+                    TextColor="#ffffff"
+                    Text="ライブに戻る"
+                    HorizontalOptions="Center"
+                    Clicked="Now_button_Clicked"
+                    WidthRequest="150"/>
+            
+                
+            <ProgressBar x:Name="s_progressbar"
+                         ProgressColor="#ff0000"
+                         HeightRequest="15"/>
+            <Label x:Name="warning_msg"
+                   TextColor="#ff0000"
+                   FontSize="20"
+                   HorizontalOptions="Center"/>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

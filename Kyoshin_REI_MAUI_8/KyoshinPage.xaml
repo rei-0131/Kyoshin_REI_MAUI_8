@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Kyoshin_REI_MAUI_8.KyoshinPage"
+             BackgroundColor="#1f2025">
+    <HorizontalStackLayout HorizontalOptions="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Image x:Name="back_image"
+                   HorizontalOptions="Center"
+                   WidthRequest="380"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Aspect="AspectFit">
+                   <Image.Source>
+                       <UriImageSource CacheValidity="00:00:01:00"/>
+                   </Image.Source>
+            </Image>
+            <Image x:Name="fore_image"
+                   HorizontalOptions="Center"
+                   WidthRequest="380"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Aspect="AspectFit">
+                   <Image.Source>
+                       <UriImageSource CacheValidity="00:00:01:00"/>
+                   </Image.Source>
+            </Image>
+            <Image x:Name="quake_image"
+                   HorizontalOptions="Center"
+                   WidthRequest="380"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Aspect="AspectFit">
+                   <Image.Source>
+                       <UriImageSource CacheValidity="00:00:01:00"/>
+                   </Image.Source>
+            </Image>
+            <Image x:Name="ps_image"
+                   HorizontalOptions="Center"
+                   WidthRequest="380"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Aspect="AspectFit">
+                   <Image.Source>
+                       <UriImageSource CacheValidity="00:00:01:00"/>
+                   </Image.Source>
+            </Image>
+            <Image x:Name="over_image"
+                   HorizontalOptions="Center"
+                   WidthRequest="380"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Aspect="AspectFit">
+                   <Image.Source>
+                       <UriImageSource CacheValidity="00:00:01:00"/>
+                   </Image.Source>
+             </Image>
+        </Grid>
+    </HorizontalStackLayout>
+</ContentPage>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Kyoshin_REI_MAUI_8.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Kyoshin_REI_MAUI_8"
+    Shell.FlyoutBehavior="Disabled"
+    Title="Kyoshin_REI_MAUI_8">
+
+    <TabBar>
+        <Tab Title="Home"
+            Icon="home.png">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="Home" />
+        </Tab>
+        <Tab Title="Monitor"
+             Icon="Monitor.png">
+            <ShellContent ContentTemplate="{DataTemplate local:KyoshinPage}" Route="Monitor"/>
+        </Tab>
+        <Tab Title="Log"
+             Icon="log.png">
+            <ShellContent ContentTemplate="{DataTemplate local:LogPage}" Route="Log" />
+        </Tab>
+        <Tab Title="Tsunami"
+             Icon="tsunami.png">
+            <ShellContent ContentTemplate="{DataTemplate local:TsunamiPage}" Route="Tsunami" />
+        </Tab>
+        <Tab Title="Setting"
+            Icon="setting.png">
+            <ShellContent ContentTemplate="{DataTemplate local:SettingPage}" Route="Setting" />
+        </Tab>
+    </TabBar>
+</Shell>
