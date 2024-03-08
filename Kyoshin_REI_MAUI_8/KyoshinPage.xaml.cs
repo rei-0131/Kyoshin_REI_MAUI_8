@@ -51,7 +51,7 @@ public partial class KyoshinPage : ContentPage
     {
         if (Convert.ToInt32(e.NewValue) == 0)
         {
-            add_sc = -1;
+            add_sc = -2;
         }
         else
         {

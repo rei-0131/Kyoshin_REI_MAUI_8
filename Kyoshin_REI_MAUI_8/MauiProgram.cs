@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Plugin.LocalNotification;
 using Plugin.LocalNotification.AndroidOption;
 using Plugin.LocalNotification.EventArgs;
+using System.Net;
 
 namespace Kyoshin_REI_MAUI_8
 {
@@ -244,12 +245,41 @@ namespace Kyoshin_REI_MAUI_8
                         if (!tmp_Tr)
                         {
                             Quake_Dict[result_eew.Data.ReportId.ToString()].Add(result_eew.Data.ReportNum.Value.ToString());
+                            int depth_int = result_eew.Data.Depth.Value;
+                            var dis = MainPage.CalculateDistance(Geoloc.my_lat, Geoloc.my_lon, result_eew.Data.Location.Latitude, result_eew.Data.Location.Longitude);
+                            double intensity_dou = MainPage.CalculateIntensity(depth_int, result_eew.Data.Magunitude.Value, dis);
+                            string jma_str = "震度0";
+                            if (intensity_dou >= 0.5 && intensity_dou < 1.5)
+                                jma_str = "震度1";
+                            else if (intensity_dou >= 1.5 && intensity_dou < 2.5)
+                                jma_str = "震度2";
+                            else if (intensity_dou >= 2.5 && intensity_dou < 3.5)
+                                jma_str = "震度3";
+                            else if (intensity_dou >= 3.5 && intensity_dou < 4.5)
+                                jma_str = "震度4";
+                            else if (intensity_dou >= 4.5 && intensity_dou < 5.0)
+                                jma_str = "震度5弱";
+                            else if (intensity_dou >= 5.0 && intensity_dou < 5.5)
+                                jma_str = "震度5強";
+                            else if (intensity_dou >= 5.5 && intensity_dou < 6.0)
+                                jma_str = "震度6弱";
+                            else if (intensity_dou >= 6.0 && intensity_dou < 6.5)
+                                jma_str = "震度6強";
+                            else if (intensity_dou >= 6.5)
+                                jma_str = "震度7";
+
+                            string report_num = "";
+                            if (result_eew.Data.IsFinal == true)
+                                report_num = "最終報";
+                            else
+                                report_num = "#" + result_eew.Data.ReportNum.Value.ToString();
+
                             var request_ = new NotificationRequest
                             {
                                 NotificationId = 100,
                                 Title = "緊急地震速報が発表されました",
                                 Subtitle = $"{DateTime.ParseExact(result_eew.Data.RequestTime, "yyyyMMddHHmmss", null).ToString("yyyy/MM/dd HH:mm:ss")}",
-                                Description = $"{result_eew.Data.AlertFlag} {result_eew.Data.ReportNum} {result_eew.Data.RegionName} {result_eew.Data.MagunitudeString}",
+                                Description = $"{result_eew.Data.AlertFlag} 第{result_eew.Data.ReportNum}報 {result_eew.Data.RegionName} {result_eew.Data.MagunitudeString}\n予想震度: {jma_str}",
                                 CategoryType = NotificationCategoryType.Status,
                                 Android =
                                 {

@@ -542,8 +542,6 @@ namespace Kyoshin_REI_MAUI_8
         private async Task Disp_in()
         {
             flo_time.Text = "1s";
-            while (!flo_qu_bo)
-                await Task.Delay(Geoloc.realtime_in);
             var coordinates = new List<PointF> { };
             flo_time.Text = "2s";
 
