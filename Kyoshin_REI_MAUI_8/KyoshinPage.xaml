@@ -17,6 +17,39 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
+            <Grid Grid.Row="0"
+                  Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="長周期地震動"
+                       TextColor="#ffffff"
+                       HorizontalOptions="End"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"/>
+                <Switch x:Name="kyoshin_type"
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        IsToggled="True"
+                        HorizontalOptions="Center"/>
+                <Label Text="強震モニタ"
+                       TextColor="#ffffff"
+                       HorizontalOptions="Start"
+                       Grid.Row="0"
+                       Grid.Column="3"
+                       Grid.ColumnSpan="2"/>
+            </Grid>
+
             <Grid Grid.Row="1"
                   Grid.RowSpan="3"
                   Grid.Column="0">
