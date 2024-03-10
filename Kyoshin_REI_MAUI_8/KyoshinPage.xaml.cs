@@ -1,13 +1,10 @@
-using KyoshinMonitorLib.UrlGenerator;
-using Microsoft.Maui.Graphics.Platform;
 using System.Diagnostics;
-using System.Reflection;
 
 namespace Kyoshin_REI_MAUI_8;
 
 public partial class KyoshinPage : ContentPage
 {
-    public static int add_sc = -2;
+    public static int add_sc = Geoloc.off_kyoshin;
 
 	public KyoshinPage()
 	{
@@ -24,12 +21,25 @@ public partial class KyoshinPage : ContentPage
         ImageSource fore_image_ = null;
 
         back_image.Source = ImageSource.FromFile("back_image.png");
-        over_image.Source = ImageSource.FromFile("over_image.png");
+        over_image.Source = ImageSource.FromFile("over_image_ky.png");
+
+        string now_over = "over_image_ky";
 
         while (true)
         {
             if(Geoloc.app_window)
             {
+                if (now_over != "over_image_ky" && kyoshin_type.IsToggled)
+                {
+                    over_image.Source = ImageSource.FromFile("over_image_ky.png");
+                    now_over = "over_image_ky";
+                }
+                else if(now_over == "over_image_ky" && !kyoshin_type.IsToggled)
+                {
+                    over_image.Source = ImageSource.FromFile("over_image_ty.png");
+                    now_over = "over_image_ty";
+                }
+
                 var targettime = DateTime.Now.AddSeconds(add_sc);
                 Debug.WriteLine(add_sc);
                 if (kyoshin_type.IsToggled)
@@ -54,7 +64,7 @@ public partial class KyoshinPage : ContentPage
     private void time_slider_ValueChanged(object sender, ValueChangedEventArgs e)
     {
         if (Convert.ToInt32(e.NewValue) == 0)
-            add_sc = -2;
+            add_sc = Geoloc.off_kyoshin;
         else
             add_sc = Convert.ToInt32(e.NewValue) * -60;
         time_label.Text = $"{Convert.ToInt32(e.NewValue)}•ª";

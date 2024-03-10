@@ -27,6 +27,7 @@ namespace Kyoshin_REI_MAUI_8
         public static int ps_cal;
         public static int get_log;
         public static bool back_op;
+        public static int off_kyoshin;
         public static bool app_window = true;
     }
 
@@ -113,6 +114,12 @@ namespace Kyoshin_REI_MAUI_8
                 Preferences.Default.Set("get_log", 50);
             }
             Geoloc.get_log = Preferences.Default.Get("get_log", 50);
+
+            if(!Preferences.Default.ContainsKey("off_kyoshin"))
+            {
+                Preferences.Default.Set("off_kyoshin", -3);
+            }
+            Geoloc.off_kyoshin = Preferences.Default.Get("off_kyoshin", 50);
 
             if (!Preferences.Default.ContainsKey("back_op"))
             {

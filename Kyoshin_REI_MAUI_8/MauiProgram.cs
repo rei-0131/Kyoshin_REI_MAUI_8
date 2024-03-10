@@ -5,11 +5,9 @@ using Android.Runtime;
 using CommunityToolkit.Maui;
 using KyoshinMonitorLib;
 using KyoshinMonitorLib.ApiResult.WebApi;
-using Microsoft.Extensions.Logging;
 using Plugin.LocalNotification;
 using Plugin.LocalNotification.AndroidOption;
 using Plugin.LocalNotification.EventArgs;
-using System.Net;
 
 namespace Kyoshin_REI_MAUI_8
 {

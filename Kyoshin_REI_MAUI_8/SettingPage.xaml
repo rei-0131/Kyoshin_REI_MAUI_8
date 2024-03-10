@@ -113,6 +113,18 @@
                        HorizontalOptions="Center"
                        PlaceholderColor="#000000"/>
 
+                <Label Text="Kyoshinオフセット"
+                       TextColor="#ffffff"
+                       Grid.Row="6"
+                       Grid.Column="0"
+                       HorizontalOptions="Center"/>
+                <Entry x:Name="kyoshin_entry"
+                       TextColor="#ffffff"
+                       Grid.Row="6"
+                       Grid.Column="1"
+                       HorizontalOptions="Center"
+                       PlaceholderColor="#000000"/>
+
                 <Label Text="バックグラウンド動作"
                        TextColor="#ffffff"
                        Grid.Row="7"
