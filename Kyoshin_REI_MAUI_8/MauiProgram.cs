@@ -5,9 +5,11 @@ using Android.Runtime;
 using CommunityToolkit.Maui;
 using KyoshinMonitorLib;
 using KyoshinMonitorLib.ApiResult.WebApi;
+using Microsoft.Extensions.Logging;
 using Plugin.LocalNotification;
 using Plugin.LocalNotification.AndroidOption;
 using Plugin.LocalNotification.EventArgs;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace Kyoshin_REI_MAUI_8
 {
@@ -18,6 +20,7 @@ namespace Kyoshin_REI_MAUI_8
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseSkiaSharp(true)
                 .UseMauiCommunityToolkit()
                 .UseLocalNotification(config =>
                 {
@@ -31,10 +34,6 @@ namespace Kyoshin_REI_MAUI_8
                                 Android =
                                 {
                                     LaunchAppWhenTapped = true,
-                                    IconName =
-                                    {
-                                        ResourceName = "i2"
-                                    }
                                 }
                             }
                         })
@@ -49,10 +48,6 @@ namespace Kyoshin_REI_MAUI_8
                                 Android =
                                 {
                                     LaunchAppWhenTapped = true,
-                                    IconName =
-                                    {
-                                        ResourceName = "i2"
-                                    }
                                 }
                             }
                         })
@@ -178,10 +173,6 @@ namespace Kyoshin_REI_MAUI_8
                         CategoryType = NotificationCategoryType.Progress,
                         Android =
                         {
-                            IconSmallName =
-                            {
-                                ResourceName = "notify_icon"
-                            },
                             ChannelId = "BackGround_None_Notice"
                         }
                     };
@@ -281,10 +272,6 @@ namespace Kyoshin_REI_MAUI_8
                                 CategoryType = NotificationCategoryType.Status,
                                 Android =
                                 {
-                                    IconSmallName =
-                                    {
-                                        ResourceName = "notify_icon"
-                                    },
                                     ChannelId = "BackGround_Warning_Notice"
                                 }
                             };
@@ -307,10 +294,6 @@ namespace Kyoshin_REI_MAUI_8
                         CategoryType = NotificationCategoryType.Status,
                         Android =
                         {
-                            IconSmallName =
-                            {
-                                ResourceName = "notify_icon"
-                            },
                             ChannelId = "BackGround_None_Notice"
                         }
                     };
@@ -326,23 +309,19 @@ namespace Kyoshin_REI_MAUI_8
             }
             catch (Exception)
             {
-                var request_ = new NotificationRequest
+                /*var request_ = new NotificationRequest
                 {
                     NotificationId = 101,
                     Title = "緊急地震速報は発表されていません。",
-                    Subtitle = "",
                     Description = "取得失敗",
                     CategoryType = NotificationCategoryType.Status,
                     Android =
-                        {
-                            IconSmallName =
-                            {
-                                ResourceName = "notify_icon"
-                            },
-                            ChannelId = "BackGround_None_Notice"
-                        }
+                    {
+                        ChannelId = "BackGround_None_Notice"
+                    }
                 };
-                await LocalNotificationCenter.Current.Show(request_);
+                await LocalNotificationCenter.Current.Show(request_);*/
+                ;
             }
         }
 

@@ -12,8 +12,16 @@
             Icon="home.png">
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="Home" />
         </Tab>
+        <Tab Title="RealTime"
+             Icon="home.png">
+            <ShellContent ContentTemplate="{DataTemplate local:RealTimePage}" Route="RealTime"/>
+        </Tab>
+        <Tab Title="Intensity"
+             Icon="intensity.png">
+            <ShellContent ContentTemplate="{DataTemplate local:IntensityPage}" Route="Intensity" />
+        </Tab>
         <Tab Title="Monitor"
-             Icon="Monitor.png">
+             Icon="monitor.png">
             <ShellContent ContentTemplate="{DataTemplate local:KyoshinPage}" Route="Monitor"/>
         </Tab>
         <Tab Title="Log"

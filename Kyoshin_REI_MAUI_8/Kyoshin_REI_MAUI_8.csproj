@@ -122,37 +122,45 @@
 
 	<ItemGroup>
 	  <None Remove="Platforms\Android\AndroidManifest.xml" />
-	  <None Remove="Platforms\Android\Resources\raw\early_warning.mp3" />
+	  <None Remove="Platforms\Android\Resources\Raw\early_warning.mp3" />
 	  <None Remove="Resources\AppIcon\ic_launcher.png" />
 	  <None Remove="Resources\Splash\splash.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Resource Include="Platforms\Android\Resources\raw\early_warning.mp3" />
+		<AndroidResource Remove="Platforms\Android\Raw\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AngleSharp" Version="1.1.0" />
+		<PackageReference Include="AngleSharp" Version="1.1.2" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
 		<PackageReference Include="KyoshinMonitorLib" Version="0.4.5.1" />
 		<PackageReference Include="KyoshinMonitorLib.SkiaImages" Version="0.4.5.1" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+		<PackageReference Include="LiveChartsCore.SkiaSharpView.Maui" Version="2.0.0-rc2" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.10" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.10" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="8.0.7" />
-		<PackageReference Include="Plugin.LocalNotification" Version="10.1.8" />
+		<PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="8.0.10" />
+		<PackageReference Include="Plugin.LocalNotification" Version="11.1.1" />
 		<PackageReference Include="Plugin.Permissions" Version="6.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Page Include="Platforms\Android\AndroidManifest.xml" />
+	  <Page Include="Platforms\Android\Resources\Raw\early_warning.mp3" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="IntensityPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="KyoshinPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="LogPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="RealTimePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SettingPage.xaml">

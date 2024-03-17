@@ -8,12 +8,12 @@ using System.Diagnostics;
 
 namespace Kyoshin_REI_MAUI_8
 {
-    //KyoshinMonitorの描画更新時にimage_floが点滅するから治す
-    //ps_image_の更新時にも同じことが起こる可能性
-
     //ディレクトリの問題なのか通知音が変わらない
 
-    //すべての処理を位置情報の取得が完了したあとに開始するように設定
+    //***重要*** P,S波の秒数を取得時間に合わせるか実時間に合わせるかの設定とそれに応じた処理を追加
+    //           現在：取得時間に同期中
+
+    //スマホのセンサを利用した地震計測機能の追加　優先度:低
 
     static class Geoloc
     {
@@ -51,6 +51,7 @@ namespace Kyoshin_REI_MAUI_8
         public static bool clear_ac = false;
         public static bool p_bo = false;
         public static bool flo_qu_bo = false;
+        public static bool loc_auth = false;
         public static PointF nearestCoordinate;
         public static ApiResult<IEnumerable<KyoshinMonitorLib.SkiaImages.ImageAnalysisResult>> result;
         public static string file_path = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "ShindoObsPoints.mpk.lz4");
@@ -151,7 +152,6 @@ namespace Kyoshin_REI_MAUI_8
 
             Per_req();
             Now_loc();
-            await Task.Delay(2000);
             Geteew();
             GetPoint();
         }
@@ -162,6 +162,16 @@ namespace Kyoshin_REI_MAUI_8
             if (status != PermissionStatus.Granted)
             {
                 await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+            }
+            while(true)
+            {
+                status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+                if (status == PermissionStatus.Granted)
+                {
+                    loc_auth = true;
+                    break;
+                }
+                await Task.Delay(1000);
             }
         }
 
@@ -191,7 +201,6 @@ namespace Kyoshin_REI_MAUI_8
 
         private async void Geteew()
         {
-            await Task.Delay(1000);
             Disp();
             Start_BackService();
             while (true)
@@ -517,7 +526,6 @@ namespace Kyoshin_REI_MAUI_8
         
         private async Task GetPoint()
         {
-            await Task.Delay(1000);
             ObservationPoint[] points = ObservationPoint.LoadFromMpk(file_path, true);
             Disp_in();
             while (true)
@@ -548,9 +556,9 @@ namespace Kyoshin_REI_MAUI_8
 
         private async Task Disp_in()
         {
-            flo_time.Text = "1s";
+            flo_time.Text = "Now Loading...";
             var coordinates = new List<PointF> { };
-            flo_time.Text = "2s";
+            //flo_time.Text = "2s";
 
             try
             {
@@ -589,7 +597,7 @@ namespace Kyoshin_REI_MAUI_8
                 System.Diagnostics.Debug.WriteLine(ex);
             }
 
-            flo_time.Text = "3s";
+            //flo_time.Text = "3s";
 
             var distances = coordinates.Select(coordinate =>
             {
@@ -705,190 +713,145 @@ namespace Kyoshin_REI_MAUI_8
                 BadgeNumber = 0,
                 Android =
                 {
-                    IconSmallName =
-                    {
-                        ResourceName = "notify_icon "
-                    },
                     ChannelId = "Location_Notice"
                 }
             };
             LocalNotificationCenter.Current.Show(request_);
-
-            var status = await CrossPermissions.Current.CheckPermissionStatusAsync<LocationWhenInUsePermission>();
-
-
-            if (status == Plugin.Permissions.Abstractions.PermissionStatus.Granted)
+            while(!loc_auth)
             {
-                try
+                await Task.Delay(1000);
+            }
+            try
+            {
+                var request = new GeolocationRequest(GeolocationAccuracy.High);
+                var location = await Geolocation.GetLocationAsync(request);
+
+                if (location != null)
                 {
-                    var request = new GeolocationRequest(GeolocationAccuracy.High);
-                    var location = await Geolocation.GetLocationAsync(request);
+                    loc_Status.Text = $"{location.Latitude} {location.Longitude}";
+                    System.Console.WriteLine($"{location.Latitude} {location.Longitude}");
+                    Geoloc.my_lat = location.Latitude;
+                    Geoloc.my_lon = location.Longitude;
 
-                    if (location != null)
+                    request_ = new NotificationRequest
                     {
-                        loc_Status.Text = $"{location.Latitude} {location.Longitude}";
-                        System.Console.WriteLine($"{location.Latitude} {location.Longitude}");
-                        Geoloc.my_lat = location.Latitude;
-                        Geoloc.my_lon = location.Longitude;
-
-                        request_ = new NotificationRequest
+                        NotificationId = 1,
+                        Title = "Kyoshin_Rei",
+                        Subtitle = "情報",
+                        Description = "位置情報の取得成功",
+                        BadgeNumber = 0,
+                        Android =
                         {
-                            NotificationId = 1,
-                            Title = "Kyoshin_Rei",
-                            Subtitle = "情報",
-                            Description = "位置情報の取得成功",
-                            BadgeNumber = 0,
-                            Android =
-                            {
-                                IconSmallName =
-                                {
-                                    ResourceName = "notify_icon"
-                                },
-                                ChannelId = "Location_Notice"
-                            }
-                        };
-                        LocalNotificationCenter.Current.Show(request_);
+                            ChannelId = "Location_Notice"
+                        }
+                    };
+                    LocalNotificationCenter.Current.Show(request_);
 
-                        var coordinates = new List<PointF> { };
+                    var coordinates = new List<PointF> { };
 
-                        try
+                    try
+                    {
+                        bool result_tf = false;
+                        while (!result_tf)
                         {
-                            bool result_tf = false;
-                            while (!result_tf)
+                            if (result != null)
                             {
-                                if (result != null)
+                                if (result.Data != null)
                                 {
-                                    if (result.Data != null)
+                                    foreach (var point in result.Data)
                                     {
-                                        foreach (var point in result.Data)
+                                        if (point.AnalysisResult == null)
                                         {
-                                            if (point.AnalysisResult == null)
-                                            {
-                                                continue;
-                                            }
-
-                                            coordinates.Add(new PointF(point.ObservationPoint.Location.Latitude, point.ObservationPoint.Location.Longitude));
+                                            continue;
                                         }
-                                        result_tf = true;
+
+                                        coordinates.Add(new PointF(point.ObservationPoint.Location.Latitude, point.ObservationPoint.Location.Longitude));
                                     }
-                                    else
-                                    {
-                                        await Task.Delay(Geoloc.realtime_in);
-                                    }
+                                    result_tf = true;
                                 }
                                 else
                                 {
                                     await Task.Delay(Geoloc.realtime_in);
                                 }
                             }
-                            var distances = coordinates.Select(coordinate =>
+                            else
                             {
-                                var diffX = coordinate.X - Geoloc.my_lat;
-                                var diffY = coordinate.Y - Geoloc.my_lon;
-
-                                var distance = Math.Sqrt(diffX * diffX + diffY * diffY);
-
-                                return distance;
-                            }).ToList();
-
-                            nearestCoordinate = coordinates.OrderBy(coordinate => distances[coordinates.IndexOf(coordinate)]).First();
+                                await Task.Delay(Geoloc.realtime_in);
+                            }
                         }
-                        catch (Exception ex)
+                        var distances = coordinates.Select(coordinate =>
                         {
-                            flo_time.Text = ex.ToString();
-                        }
+                            var diffX = coordinate.X - Geoloc.my_lat;
+                            var diffY = coordinate.Y - Geoloc.my_lon;
+
+                            var distance = Math.Sqrt(diffX * diffX + diffY * diffY);
+
+                            return distance;
+                        }).ToList();
+
+                        nearestCoordinate = coordinates.OrderBy(coordinate => distances[coordinates.IndexOf(coordinate)]).First();
+                    }
+                    catch (Exception ex)
+                    {
+                        flo_time.Text = ex.ToString();
                     }
                 }
-                catch (FeatureNotSupportedException)
-                {
-                    loc_Status.Text = "Not Supported";
-                    System.Console.WriteLine("Not Supported");
-                    request_ = new NotificationRequest
-                    {
-                        NotificationId = 1,
-                        Title = "Kyoshin_Rei",
-                        Subtitle = "情報",
-                        Description = "位置情報の取得はサポートしていません",
-                        BadgeNumber = 0,
-                        Android =
-                        {
-                            IconSmallName =
-                            {
-                                ResourceName = "notify_icon"
-                            },
-                            ChannelId = "Location_Notice"
-                        }
-                    };
-                    LocalNotificationCenter.Current.Show(request_);
-                }
-                catch (FeatureNotEnabledException)
-                {
-                    loc_Status.Text = "Not Enabled";
-                    System.Console.WriteLine("Not Enabled");
-                    request_ = new NotificationRequest
-                        {
-                            NotificationId = 1,
-                            Title = "Kyoshin_Rei",
-                            Subtitle = "情報",
-                            Description = "位置情報取得の権限がありません",
-                            BadgeNumber = 0,
-                            Android =
-                            {
-                                IconSmallName =
-                                {
-                                    ResourceName = "notify_icon"
-                                },
-                                ChannelId = "Location_Notice"
-                            }
-                    };
-                        LocalNotificationCenter.Current.Show(request_);
-                }
-                catch (PermissionException)
-                {
-                    loc_Status.Text = "No Permission";
-                    System.Console.WriteLine("No Permission");
-                    request_ = new NotificationRequest
-                    {
-                        NotificationId = 1,
-                        Title = "Kyoshin_Rei",
-                        Subtitle = "情報",
-                        Description = "位置情報の取得失敗",
-                        BadgeNumber = 0,
-                        Android =
-                        {
-                            IconSmallName =
-                            {
-                                ResourceName = "notify_icon"
-                            },
-                            ChannelId = "Location_Notice"
-                        }
-                    };
-                    LocalNotificationCenter.Current.Show(request_);
-                }
-                catch (Exception)
-                {
-                    loc_Status.Text = "Grr Error";
-                    System.Console.WriteLine("Grr Error");
-                    request_ = new NotificationRequest
-                    {
-                        NotificationId = 1,
-                        Title = "Kyoshin_Rei",
-                        Subtitle = "情報",
-                        Description = "位置情報の取得失敗",
-                        BadgeNumber = 0,
-                        Android =
-                        {
-                            IconSmallName =
-                            {
-                                ResourceName = "notify_icon"
-                            },
-                            ChannelId = "Location_Notice"
-                        }
-                    };
-                    LocalNotificationCenter.Current.Show(request_);
-                }
             }
-            else
+            catch (FeatureNotSupportedException)
+            {
+                loc_Status.Text = "Not Supported";
+                System.Console.WriteLine("Not Supported");
+                request_ = new NotificationRequest
+                {
+                    NotificationId = 1,
+                    Title = "Kyoshin_Rei",
+                    Subtitle = "情報",
+                    Description = "位置情報の取得はサポートしていません",
+                    BadgeNumber = 0,
+                    Android =
+                    {
+                        ChannelId = "Location_Notice"
+                    }
+                };
+                LocalNotificationCenter.Current.Show(request_);
+            }
+            catch (FeatureNotEnabledException)
+            {
+                loc_Status.Text = "Not Enabled";
+                System.Console.WriteLine("Not Enabled");
+                request_ = new NotificationRequest
+                    {
+                        NotificationId = 1,
+                        Title = "Kyoshin_Rei",
+                        Subtitle = "情報",
+                        Description = "位置情報取得の権限がありません",
+                        BadgeNumber = 0,
+                        Android =
+                        {
+                            ChannelId = "Location_Notice"
+                        }
+                };
+                    LocalNotificationCenter.Current.Show(request_);
+            }
+            catch (PermissionException)
+            {
+                loc_Status.Text = "No Permission";
+                System.Console.WriteLine("No Permission");
+                request_ = new NotificationRequest
+                {
+                    NotificationId = 1,
+                    Title = "Kyoshin_Rei",
+                    Subtitle = "情報",
+                    Description = "位置情報の取得失敗",
+                    BadgeNumber = 0,
+                    Android =
+                    {
+                        ChannelId = "Location_Notice"
+                    }
+                };
+                LocalNotificationCenter.Current.Show(request_);
+            }
+            catch (Exception)
             {
                 loc_Status.Text = "Grr Error";
                 System.Console.WriteLine("Grr Error");
@@ -901,10 +864,6 @@ namespace Kyoshin_REI_MAUI_8
                     BadgeNumber = 0,
                     Android =
                     {
-                        IconSmallName =
-                        {
-                            ResourceName = "notify_icon"
-                        },
                         ChannelId = "Location_Notice"
                     }
                 };

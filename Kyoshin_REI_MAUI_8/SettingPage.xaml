@@ -22,6 +22,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -115,25 +116,25 @@
 
                 <Label Text="Kyoshinオフセット"
                        TextColor="#ffffff"
-                       Grid.Row="6"
+                       Grid.Row="7"
                        Grid.Column="0"
                        HorizontalOptions="Center"/>
                 <Entry x:Name="kyoshin_entry"
                        TextColor="#ffffff"
-                       Grid.Row="6"
+                       Grid.Row="7"
                        Grid.Column="1"
                        HorizontalOptions="Center"
                        PlaceholderColor="#000000"/>
 
                 <Label Text="バックグラウンド動作"
                        TextColor="#ffffff"
-                       Grid.Row="7"
+                       Grid.Row="8"
                        Grid.Column="0"
                        HorizontalOptions="Center"/>
                 <Switch x:Name="back_op"
                         OnColor="#007fff"
                         HorizontalOptions="Center"
-                        Grid.Row="7"
+                        Grid.Row="8"
                         Grid.Column="1"/>
             </Grid>
 
