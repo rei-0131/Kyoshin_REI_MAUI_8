@@ -1,5 +1,3 @@
-using Android.Widget;
-
 namespace Kyoshin_REI_MAUI_8;
 
 public partial class RealTimePage : ContentPage
@@ -16,8 +14,6 @@ public partial class RealTimePage : ContentPage
 
         Sensor_Data();
     }
-
-    //開始/終了ボタン追加
 
     private async void Sensor_Data()
     {
@@ -36,9 +32,9 @@ public partial class RealTimePage : ContentPage
         x = e.Reading.Acceleration.X;
         y = e.Reading.Acceleration.Y;
         z = e.Reading.Acceleration.Z;
-        x_data.Text = $"X: {x + co_x}";
-        y_data.Text = $"Y: {y + co_y}";
-        z_data.Text = $"Z: {z + co_z}";
+        x_data.Text = (x + co_x).ToString();
+        y_data.Text = (y + co_y).ToString();
+        z_data.Text = (z + co_z).ToString();
 
         //100gal = 1m/s
         double max = Max(x + co_x, y + co_y, z + co_z);
