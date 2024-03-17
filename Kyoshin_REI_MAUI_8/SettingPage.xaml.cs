@@ -16,6 +16,7 @@ public partial class SettingPage : ContentPage
 		ps_entry.Text = Geoloc.ps_cal.ToString();
         kyoshin_entry.Text = Geoloc.off_kyoshin.ToString();
 		log_entry.Text = Geoloc.get_log.ToString();
+        off_ps.IsToggled = Geoloc.off_ps;
 		back_op.IsToggled = Geoloc.back_op;
 		var hour_traffic = 3600 / (Geoloc.realtime_in / 1000) * 550;
 		if (hour_traffic < 1024)
@@ -70,6 +71,7 @@ public partial class SettingPage : ContentPage
                 Geoloc.get_log = int.Parse(log_entry.Text);
             Geoloc.off_kyoshin = int.Parse(kyoshin_entry.Text);
 
+            Geoloc.off_ps = off_ps.IsToggled;
 			Geoloc.back_op = back_op.IsToggled;
 			Preferences.Default.Set("gettime", Geoloc.gettime);
 			Preferences.Default.Set("eew_in", Geoloc.eew_in);
@@ -79,6 +81,7 @@ public partial class SettingPage : ContentPage
 			Preferences.Default.Set("ps_cal", Geoloc.ps_cal);
 			Preferences.Default.Set("get_log", Geoloc.get_log);
             Preferences.Default.Set("off_kyoshin",Geoloc.off_kyoshin);
+            Preferences.Default.Set("off_ps",Geoloc.off_ps);
 			Preferences.Default.Set("back_op", Geoloc.back_op);
             var hour_traffic = 3600 / (Geoloc.eew_in / 1000) * 550;
             if (hour_traffic < 1024)

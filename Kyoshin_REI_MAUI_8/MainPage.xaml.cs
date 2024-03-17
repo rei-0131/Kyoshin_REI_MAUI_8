@@ -10,10 +10,6 @@ namespace Kyoshin_REI_MAUI_8
 {
     //ディレクトリの問題なのか通知音が変わらない
 
-    //***重要*** P,S波の秒数を取得時間に合わせるか実時間に合わせるかの設定とそれに応じた処理を追加
-    //           現在：取得時間に同期中
-    //過
-
     static class Geoloc
     {
         public static double my_lat;
@@ -27,6 +23,7 @@ namespace Kyoshin_REI_MAUI_8
         public static int get_log;
         public static bool back_op;
         public static int off_kyoshin;
+        public static bool off_ps;
         public static bool app_window = true;
     }
 
@@ -126,6 +123,12 @@ namespace Kyoshin_REI_MAUI_8
                 Preferences.Default.Set("back_op", false);
             }
             Geoloc.back_op = Preferences.Default.Get("back_op", false);
+
+            if(!Preferences.Default.ContainsKey("off_ps"))
+            {
+                Preferences.Default.Set("off_ps", true);
+            }
+            Geoloc.off_ps = Preferences.Default.Get("off_ps", true);
         }
 
         private async void Start()
@@ -283,8 +286,6 @@ namespace Kyoshin_REI_MAUI_8
                                 clear_ac = false;
                             }
 
-                            var mai_second_be = (now_time_date - DateTime.ParseExact(result_eew.Data.ReportId.ToString(), "yyyyMMddHHmmss", null)).TotalSeconds;
-                            int mai_second = Convert.ToInt32(mai_second_be);
 
                             if (Quake_Dict.ContainsKey(result_eew.Data.ReportId.ToString()) == false)
                             {
@@ -463,32 +464,70 @@ namespace Kyoshin_REI_MAUI_8
                                         max_intensity.Source = bitmap;
                                     }
                                 }
-                                if (p_seconds == 999)
+                                if(Geoloc.off_ps)
                                 {
-                                    p_second.Text = "計算中";
-                                }
-                                else if ((p_seconds - mai_second) < 0)
-                                {
-                                    p_second.Text = "0秒";
-                                }
-                                else
-                                {
-                                    p_second.Text = (p_seconds - mai_second) + "秒";
-                                }
+                                    var mai_second_be = (DateTime.Now - DateTime.ParseExact(result_eew.Data.ReportId.ToString(), "yyyyMMddHHmmss", null)).TotalSeconds;
+                                    int mai_second = Convert.ToInt32(mai_second_be);
+                                    if (p_seconds == 999)
+                                    {
+                                        p_second.Text = "計算中";
+                                    }
+                                    else if ((p_seconds - mai_second) < 0)
+                                    {
+                                        p_second.Text = "0秒";
+                                    }
+                                    else
+                                    {
+                                        p_second.Text = (p_seconds - mai_second) + "秒";
+                                    }
 
-                                if (s_seconds == 999)
-                                {
-                                    s_second.Text = "計算中";
-                                }
-                                else if ((s_seconds - mai_second) < 0)
-                                {
-                                    s_progressbar.Progress = 1;
-                                    s_second.Text = "0秒";
+                                    if (s_seconds == 999)
+                                    {
+                                        s_second.Text = "計算中";
+                                    }
+                                    else if ((s_seconds - mai_second) < 0)
+                                    {
+                                        s_progressbar.Progress = 1;
+                                        s_second.Text = "0秒";
+                                    }
+                                    else
+                                    {
+                                        s_progressbar.Progress = mai_second / s_seconds;
+                                        s_second.Text = (s_seconds - mai_second) + "秒";
+                                    }
                                 }
                                 else
                                 {
-                                    s_progressbar.Progress = mai_second / s_seconds;
-                                    s_second.Text = (s_seconds - mai_second) + "秒";
+                                    var mai_second_be = (now_time_date - DateTime.ParseExact(result_eew.Data.ReportId.ToString(), "yyyyMMddHHmmss", null)).TotalSeconds;
+                                    int mai_second = Convert.ToInt32(mai_second_be);
+
+                                    if (p_seconds == 999)
+                                    {
+                                        p_second.Text = "計算中";
+                                    }
+                                    else if ((p_seconds - mai_second) < 0)
+                                    {
+                                        p_second.Text = "0秒";
+                                    }
+                                    else
+                                    {
+                                        p_second.Text = (p_seconds - mai_second) + "秒";
+                                    }
+
+                                    if (s_seconds == 999)
+                                    {
+                                        s_second.Text = "計算中";
+                                    }
+                                    else if ((s_seconds - mai_second) < 0)
+                                    {
+                                        s_progressbar.Progress = 1;
+                                        s_second.Text = "0秒";
+                                    }
+                                    else
+                                    {
+                                        s_progressbar.Progress = mai_second / s_seconds;
+                                        s_second.Text = (s_seconds - mai_second) + "秒";
+                                    }
                                 }
                             }
                         }

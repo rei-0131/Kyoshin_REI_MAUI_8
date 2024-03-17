@@ -23,6 +23,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -126,15 +127,26 @@
                        HorizontalOptions="Center"
                        PlaceholderColor="#000000"/>
 
-                <Label Text="バックグラウンド動作"
+                <Label Text="PS波オフセット"
                        TextColor="#ffffff"
                        Grid.Row="8"
+                       Grid.Column="0"
+                       HorizontalOptions="Center"/>
+                <Switch x:Name="off_ps"
+                        OnColor="#007fff"
+                        HorizontalOptions="Center"
+                        Grid.Row="8"
+                        Grid.Column="1"/>
+
+                <Label Text="バックグラウンド動作"
+                       TextColor="#ffffff"
+                       Grid.Row="9"
                        Grid.Column="0"
                        HorizontalOptions="Center"/>
                 <Switch x:Name="back_op"
                         OnColor="#007fff"
                         HorizontalOptions="Center"
-                        Grid.Row="8"
+                        Grid.Row="9"
                         Grid.Column="1"/>
             </Grid>
 
