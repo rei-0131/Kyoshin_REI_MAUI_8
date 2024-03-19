@@ -4,37 +4,88 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Kyoshin_REI_MAUI_8"
-    Shell.FlyoutBehavior="Disabled"
-    Title="Kyoshin_REI_MAUI_8">
-
-    <TabBar>
-        <Tab Title="Home"
-            Icon="home.png">
+    Shell.FlyoutBehavior="Flyout"
+    Title="Kyoshin_REI_MAUI_8"
+    BackgroundColor="#1f2025"
+    FlyoutBackgroundColor="#1f2025">
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Image Aspect="AspectFill"
+                   Source="ic_header.png"/>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    
+    <FlyoutItem Title="Home"
+                Icon="home.png">
+        <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="Home" />
         </Tab>
-        <Tab Title="RealTime"
-             Icon="home.png">
+    </FlyoutItem>
+    <FlyoutItem Title="RealTime"
+                Icon="home.png">
+        <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:RealTimePage}" Route="RealTime"/>
         </Tab>
-        <Tab Title="Intensity"
-             Icon="intensity.png">
+    </FlyoutItem>
+    <FlyoutItem Title="Intensity"
+                Icon="intensity.png">
+        <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:IntensityPage}" Route="Intensity" />
         </Tab>
-        <Tab Title="Monitor"
-             Icon="monitor.png">
+    </FlyoutItem>
+    <FlyoutItem Title="Monitor"
+                Icon="monitor.png">
+        <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:KyoshinPage}" Route="Monitor"/>
         </Tab>
-        <Tab Title="Log"
-             Icon="log.png">
+    </FlyoutItem>
+    <FlyoutItem Title="Log"
+                Icon="log.png">
+        <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:LogPage}" Route="Log" />
         </Tab>
-        <Tab Title="Tsunami"
-             Icon="tsunami.png">
+    </FlyoutItem>
+    <FlyoutItem Title="Tsunami"
+                Icon="tsunami.png">
+        <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:TsunamiPage}" Route="Tsunami" />
         </Tab>
-        <Tab Title="Setting"
-            Icon="setting.png">
-            <ShellContent ContentTemplate="{DataTemplate local:SettingPage}" Route="Setting" />
-        </Tab>
-    </TabBar>
+    </FlyoutItem>
+    
+    <ShellContent Title="Setting"
+                  Icon="setting.png"
+                  ContentTemplate="{DataTemplate local:SettingPage}"
+                  Route="Setting"/>
+
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <StackLayout>
+                <Label Text="Kyoshin_REI_MAUI"
+                       TextColor="#ffffff"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Created by REI"
+                           TextColor="#ffffff"
+                           HorizontalOptions="Start"
+                           Grid.Row="0"
+                           Grid.Column="0"/>
+                    <Label Text="ver5.2"
+                           TextColor="#ffffff"
+                           HorizontalOptions="End"
+                           Grid.Row="0"
+                           Grid.Column="1"/>
+                </Grid>
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
 </Shell>

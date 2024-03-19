@@ -42,7 +42,6 @@ namespace Kyoshin_REI_MAUI_8
         public static DateTime now_time_date;
         public static DateTime targetTime;
         public static DateTime targetTime_point;
-        //public static int interval = 1000;
         public static string file;
         public static bool clear_ac = false;
         public static bool p_bo = false;
@@ -52,7 +51,6 @@ namespace Kyoshin_REI_MAUI_8
         public static ApiResult<IEnumerable<KyoshinMonitorLib.SkiaImages.ImageAnalysisResult>> result;
         public static string file_path = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "ShindoObsPoints.mpk.lz4");
 
-        //static readonly int NOTIFICATION_ID = 1000;
         static readonly string CHANNEL_ID = "location_notification";
         internal static readonly string COUNT_KEY = "count";
         public static int count = 0;
@@ -154,6 +152,7 @@ namespace Kyoshin_REI_MAUI_8
 
             Per_req();
             Now_loc();
+            await Task.Delay(1000);
             Geteew();
             GetPoint();
         }

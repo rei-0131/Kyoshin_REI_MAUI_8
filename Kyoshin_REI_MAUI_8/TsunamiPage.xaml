@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Kyoshin_REI_MAUI_8.TsunamiPage"
-             BackgroundColor="#1f2025">
+             BackgroundColor="#1f2025"
+             Title="Tsunami">
     <ScrollView>
         <VerticalStackLayout 
         Spacing="25" 

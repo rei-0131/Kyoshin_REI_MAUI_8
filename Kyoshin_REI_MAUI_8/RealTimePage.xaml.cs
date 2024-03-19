@@ -32,9 +32,9 @@ public partial class RealTimePage : ContentPage
         x = e.Reading.Acceleration.X;
         y = e.Reading.Acceleration.Y;
         z = e.Reading.Acceleration.Z;
-        x_data.Text = (x + co_x).ToString();
-        y_data.Text = (y + co_y).ToString();
-        z_data.Text = (z + co_z).ToString();
+        x_data.Text = (x + co_x).ToString("0.00000");
+        y_data.Text = (y + co_y).ToString("0.00000");
+        z_data.Text = (z + co_z).ToString("0.00000");
 
         //100gal = 1m/s
         double max = Max(x + co_x, y + co_y, z + co_z);

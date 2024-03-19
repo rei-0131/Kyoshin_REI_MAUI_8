@@ -104,7 +104,7 @@ public partial class SettingPage : ContentPage
                 //GB
                 traffic_label.Text = (hour_traffic / 1024 / 1024 / 1024).ToString("0.000") + "GB/h  ";
             }
-            message_setting.Text = "İ’è•ÏX¬Œ÷";
+            message_setting.Text = $"{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")} İ’è•ÏX¬Œ÷";
 			if(Geoloc.back_op)
 			{
                 var serviceInstance = new BackServices();
