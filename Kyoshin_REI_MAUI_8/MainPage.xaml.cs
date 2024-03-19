@@ -19,6 +19,7 @@ namespace Kyoshin_REI_MAUI_8
         public static int kyoshin_in;
         public static int realtime_in;
         public static int gettime;
+        public static int gettime_point;
         public static int ps_cal;
         public static int get_log;
         public static bool back_op;
@@ -45,7 +46,6 @@ namespace Kyoshin_REI_MAUI_8
         public static string file;
         public static bool clear_ac = false;
         public static bool p_bo = false;
-        public static bool flo_qu_bo = false;
         public static bool loc_auth = false;
         public static PointF nearestCoordinate;
         public static ApiResult<IEnumerable<KyoshinMonitorLib.SkiaImages.ImageAnalysisResult>> result;
@@ -97,6 +97,12 @@ namespace Kyoshin_REI_MAUI_8
                 Preferences.Default.Set("gettime", -2);
             }
             Geoloc.gettime = Preferences.Default.Get("gettime", -2);
+
+            if(!Preferences.Default.ContainsKey("gettime_point"))
+            {
+                Preferences.Default.Set("gettime_point", -2);
+            }
+            Geoloc.gettime_point = Preferences.Default.Get("gettime_point", -2);
 
             if (!Preferences.Default.ContainsKey("ps_cal"))
             {
@@ -565,6 +571,7 @@ namespace Kyoshin_REI_MAUI_8
         {
             ObservationPoint[] points = ObservationPoint.LoadFromMpk(file_path, true);
             Disp_in();
+            await Task.Delay(1000);
             while (true)
             {
                 if(Geoloc.app_window)
@@ -572,13 +579,8 @@ namespace Kyoshin_REI_MAUI_8
                     try
                     {
                         using var webApi = new WebApi();
-                        targetTime_point = DateTime.Now.AddSeconds(Geoloc.gettime);
+                        targetTime_point = DateTime.Now.AddSeconds(Geoloc.gettime_point);
                         result = await webApi.ParseScaleFromParameterAsync(points, targetTime_point);
-                        if (result != null)
-                        {
-                            if (result.Data != null)
-                                flo_qu_bo = true;
-                        }
                         webApi.Dispose();
                     }
                     catch (Exception ex)
@@ -593,9 +595,10 @@ namespace Kyoshin_REI_MAUI_8
 
         private async Task Disp_in()
         {
-            flo_time.Text = "Now Loading...";
+            flo_time.Text = "Now Loading.";
+            await Task.Delay(1000);
             var coordinates = new List<PointF> { };
-            //flo_time.Text = "2s";
+            flo_time.Text = "Now Loading..";
 
             try
             {
@@ -634,7 +637,7 @@ namespace Kyoshin_REI_MAUI_8
                 System.Diagnostics.Debug.WriteLine(ex);
             }
 
-            //flo_time.Text = "3s";
+            flo_time.Text = "Now Loading...";
 
             var distances = coordinates.Select(coordinate =>
             {
@@ -646,6 +649,8 @@ namespace Kyoshin_REI_MAUI_8
                 return distance;
             }).ToList();
 
+            flo_time.Text = "Now Loading....";
+
             try
             {
                 nearestCoordinate = coordinates.OrderBy(coordinate => distances[coordinates.IndexOf(coordinate)]).First();
@@ -655,6 +660,8 @@ namespace Kyoshin_REI_MAUI_8
                 flo_time.Text = ex.ToString();
                 System.Diagnostics.Debug.WriteLine(ex);
             }
+
+            flo_time.Text = "Now Loading.....";
 
             while (true)
             {

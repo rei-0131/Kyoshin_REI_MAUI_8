@@ -9,6 +9,7 @@ public partial class SettingPage : ContentPage
 		InitializeComponent();
 
 		gettime_entry.Text = Geoloc.gettime.ToString();
+        gettime_point_entry.Text = Geoloc.gettime_point.ToString();
 		eew_interval_entry.Text = Geoloc.eew_in.ToString();
         realtime_interval_entry.Text = Geoloc.realtime_in.ToString();
         back_interval_entry.Text = Geoloc.back_in.ToString();
@@ -47,6 +48,7 @@ public partial class SettingPage : ContentPage
         try
 		{
             Geoloc.gettime = int.Parse(gettime_entry.Text);
+            Geoloc.gettime_point = int.Parse(gettime_point_entry.Text);
             Geoloc.eew_in = int.Parse(eew_interval_entry.Text);
             Geoloc.realtime_in = int.Parse(realtime_interval_entry.Text);
 
@@ -74,6 +76,7 @@ public partial class SettingPage : ContentPage
             Geoloc.off_ps = off_ps.IsToggled;
 			Geoloc.back_op = back_op.IsToggled;
 			Preferences.Default.Set("gettime", Geoloc.gettime);
+            Preferences.Default.Set("gettime_point", Geoloc.gettime_point);
 			Preferences.Default.Set("eew_in", Geoloc.eew_in);
             Preferences.Default.Set("realtime_in", Geoloc.realtime_in);
             Preferences.Default.Set("back_in", Geoloc.back_in);
@@ -104,7 +107,7 @@ public partial class SettingPage : ContentPage
                 //GB
                 traffic_label.Text = (hour_traffic / 1024 / 1024 / 1024).ToString("0.000") + "GB/h  ";
             }
-            message_setting.Text = $"{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")} ê›íËïœçXê¨å˜";
+            message_setting.Text = $"[{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}] ê›íËïœçXê¨å˜";
 			if(Geoloc.back_op)
 			{
                 var serviceInstance = new BackServices();

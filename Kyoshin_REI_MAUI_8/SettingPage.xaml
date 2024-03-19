@@ -25,6 +25,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -32,7 +33,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Label Text="取得誤差 (s)"
+                <Label Text="EEW取得誤差 (s)"
                        TextColor="#ffffff"
                        Grid.Row="0"
                        Grid.Column="0"
@@ -44,110 +45,122 @@
                        HorizontalOptions="Center"
                        PlaceholderColor="#000000"/>
 
-                <Label Text="EEW取得間隔 (ms)"
+                <Label Text="Point取得誤差 (s)"
                        TextColor="#ffffff"
                        Grid.Row="1"
                        Grid.Column="0"
                        HorizontalOptions="Center"/>
-                <Entry x:Name="eew_interval_entry"
+                <Entry x:Name="gettime_point_entry"
                        TextColor="#ffffff"
                        Grid.Row="1"
+                       Grid.Column="1"
+                       HorizontalOptions="Center"
+                       PlaceholderColor="#000000"/>
+
+                <Label Text="EEW取得間隔 (ms)"
+                       TextColor="#ffffff"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       HorizontalOptions="Center"/>
+                <Entry x:Name="eew_interval_entry"
+                       TextColor="#ffffff"
+                       Grid.Row="2"
                        Grid.Column="1"
                        HorizontalOptions="Center"
                        PlaceholderColor="#000000"/>
 
                 <Label Text="リアルタイム震度 取得間隔 (ms)"
                        TextColor="#ffffff"
-                       Grid.Row="2"
+                       Grid.Row="3"
                        Grid.Column="0"
                        HorizontalOptions="Center"/>
                 <Entry x:Name="realtime_interval_entry"
                        TextColor="#ffffff"
-                       Grid.Row="2"
+                       Grid.Row="3"
                        Grid.Column="1"
                        HorizontalOptions="Center"
                        PlaceholderColor="#000000"/>
 
                 <Label Text="バックグラウンド処理 取得間隔 (ms)"
                        TextColor="#ffffff"
-                       Grid.Row="3"
+                       Grid.Row="4"
                        Grid.Column="0"
                        HorizontalOptions="Center"/>
                 <Entry x:Name="back_interval_entry"
                        TextColor="#ffffff"
-                       Grid.Row="3"
+                       Grid.Row="4"
                        Grid.Column="1"
                        HorizontalOptions="Center"
                        PlaceholderColor="#000000"/>
 
                 <Label Text="Kyoshin Monitor 取得間隔 (ms)"
                        TextColor="#ffffff"
-                       Grid.Row="4"
+                       Grid.Row="5"
                        Grid.Column="0"
                        HorizontalOptions="Center"/>
                 <Entry x:Name="kyoshin_interval_entry"
                        TextColor="#ffffff"
-                       Grid.Row="4"
+                       Grid.Row="5"
                        Grid.Column="1"
                        HorizontalOptions="Center"
                        PlaceholderColor="#000000"/>
 
                 <Label Text="P,S波計算"
                        TextColor="#ffffff"
-                       Grid.Row="5"
+                       Grid.Row="6"
                        Grid.Column="0"
                        HorizontalOptions="Center"/>
                 <Entry x:Name="ps_entry"
                        TextColor="#ffffff"
-                       Grid.Row="5"
+                       Grid.Row="6"
                        Grid.Column="1"
                        HorizontalOptions="Center"
                        PlaceholderColor="#000000"/>
 
                 <Label Text="ログ表示数"
                        TextColor="#ffffff"
-                       Grid.Row="6"
+                       Grid.Row="7"
                        Grid.Column="0"
                        HorizontalOptions="Center"/>
                 <Entry x:Name="log_entry"
                        TextColor="#ffffff"
-                       Grid.Row="6"
+                       Grid.Row="7"
                        Grid.Column="1"
                        HorizontalOptions="Center"
                        PlaceholderColor="#000000"/>
 
                 <Label Text="Kyoshinオフセット"
                        TextColor="#ffffff"
-                       Grid.Row="7"
+                       Grid.Row="8"
                        Grid.Column="0"
                        HorizontalOptions="Center"/>
                 <Entry x:Name="kyoshin_entry"
                        TextColor="#ffffff"
-                       Grid.Row="7"
+                       Grid.Row="8"
                        Grid.Column="1"
                        HorizontalOptions="Center"
                        PlaceholderColor="#000000"/>
 
                 <Label Text="PS波オフセット"
                        TextColor="#ffffff"
-                       Grid.Row="8"
+                       Grid.Row="9"
                        Grid.Column="0"
                        HorizontalOptions="Center"/>
                 <Switch x:Name="off_ps"
                         OnColor="#007fff"
                         HorizontalOptions="Center"
-                        Grid.Row="8"
+                        Grid.Row="9"
                         Grid.Column="1"/>
 
                 <Label Text="バックグラウンド動作"
                        TextColor="#ffffff"
-                       Grid.Row="9"
+                       Grid.Row="10"
                        Grid.Column="0"
                        HorizontalOptions="Center"/>
                 <Switch x:Name="back_op"
                         OnColor="#007fff"
                         HorizontalOptions="Center"
-                        Grid.Row="9"
+                        Grid.Row="10"
                         Grid.Column="1"/>
             </Grid>
 
