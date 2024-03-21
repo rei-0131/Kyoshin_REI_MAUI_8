@@ -22,7 +22,7 @@
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="RealTime"
-                Icon="home.png">
+                Icon="realtime.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:RealTimePage}" Route="RealTime"/>
         </Tab>
