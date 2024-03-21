@@ -107,10 +107,6 @@ public partial class IntensityPage : ContentPage
                     intensitylist.IsRefreshing = false;
                 }
             }
-            else
-            {
-                break;
-            }
             await Task.Delay(Geoloc.realtime_in);
         }
     }
