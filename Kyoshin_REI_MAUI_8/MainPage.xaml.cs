@@ -1,7 +1,6 @@
 ﻿using KyoshinMonitorLib;
 using KyoshinMonitorLib.ApiResult.WebApi;
 using System.Text.RegularExpressions;
-using Plugin.Permissions;
 using Plugin.LocalNotification;
 using KyoshinMonitorLib.SkiaImages;
 using System.Diagnostics;
