@@ -4,7 +4,8 @@
              x:Class="Kyoshin_REI_MAUI_8.AccelMonitorPage"
              Title="AccelMonitorPage"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
-             xmlns:vms="clr-namespace:Kyoshin_REI_MAUI_8.ViewModels">
+             xmlns:vms="clr-namespace:Kyoshin_REI_MAUI_8.ViewModels"
+             BackgroundColor="#1f2025">
     <ContentPage.BindingContext>
         <vms:ViewModel/>
     </ContentPage.BindingContext>
@@ -45,8 +46,10 @@
             <lvc:CartesianChart Grid.Row="1" 
                                 Grid.Column="0"
                                 Grid.ColumnSpan="5"
-                                Series="{Binding Series}">
-                
+                                SyncContext="{Binding Sync}"
+                                Series="{Binding Series}"
+                                XAxes="{Binding XAxes}">
+
             </lvc:CartesianChart>
         </Grid>
     </ContentPage.Content>
