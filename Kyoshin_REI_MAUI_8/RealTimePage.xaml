@@ -2,9 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Kyoshin_REI_MAUI_8.RealTimePage"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             xmlns:vms="clr-namespace:Kyoshin_REI_MAUI_8.ViewModels"
              BackgroundColor="#1f2025"
              Title="RealTime">
-    <ScrollView>
+    <ContentPage.BindingContext>
+        <vms:ViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
         <StackLayout
             Orientation="Vertical">
             <Grid>
@@ -20,41 +25,42 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Text="X"
-                       TextColor="#ffffff"
-                       HorizontalOptions="Center"
-                       Grid.Row="0"
-                       Grid.Column="0"/>
+                        TextColor="#ffffff"
+                        HorizontalOptions="Center"
+                        Grid.Row="0"
+                        Grid.Column="0"/>
                 <Label Text="Y"
-                       TextColor="#ffffff"
-                       HorizontalOptions="Center"
-                       Grid.Row="0"
-                       Grid.Column="1"/>
+                        TextColor="#ffffff"
+                        HorizontalOptions="Center"
+                        Grid.Row="0"
+                        Grid.Column="1"/>
                 <Label Text="Z"
-                       TextColor="#ffffff"
-                       HorizontalOptions="Center"
-                       Grid.Row="0"
-                       Grid.Column="2"/>
-                
+                        TextColor="#ffffff"
+                        HorizontalOptions="Center"
+                        Grid.Row="0"
+                        Grid.Column="2"/>
+
                 <Label x:Name="x_data"
-                       HorizontalOptions="Center"
-                       TextColor="#ffffff"
-                       Grid.Row="1"
-                       Grid.Column="0"/>
+                        HorizontalOptions="Center"
+                        TextColor="#ffffff"
+                        Grid.Row="1"
+                        Grid.Column="0"/>
                 <Label x:Name="y_data" 
-                       HorizontalOptions="Center"
-                       TextColor="#ffffff"
-                       Grid.Row="1"
-                       Grid.Column="1"/>
+                        HorizontalOptions="Center"
+                        TextColor="#ffffff"
+                        Grid.Row="1"
+                        Grid.Column="1"/>
                 <Label x:Name="z_data"
-                       HorizontalOptions="Center"
-                       TextColor="#ffffff"
-                       Grid.Row="1"
-                       Grid.Column="2"/>
+                        HorizontalOptions="Center"
+                        TextColor="#ffffff"
+                        Grid.Row="1"
+                        Grid.Column="2"/>
             </Grid>
+
             <Label
-                x:Name="gal_inten"
-                HorizontalOptions="Center"
-                TextColor="#ffffff"/>
+                    x:Name="gal_inten"
+                    HorizontalOptions="Center"
+                    TextColor="#ffffff"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -66,13 +72,13 @@
                 </Grid.ColumnDefinitions>
 
                 <Button
-                    x:Name="co_button"
-                    Text="補正"
-                    HorizontalOptions="Center"
-                    TextColor="#ffffff"
-                    Clicked="co_button_Clicked"
-                    Grid.Row="0"
-                    Grid.Column="0"/>
+                        x:Name="co_button"
+                        Text="補正"
+                        HorizontalOptions="Center"
+                        TextColor="#ffffff"
+                        Clicked="co_button_Clicked"
+                        Grid.Row="0"
+                        Grid.Column="0"/>
                 <Button
                     x:Name="ss_button"
                     Text="開始/終了"
@@ -83,5 +89,5 @@
                     Grid.Column="1"/>
             </Grid>
         </StackLayout>
-    </ScrollView>
+    </ContentPage.Content>
 </ContentPage>

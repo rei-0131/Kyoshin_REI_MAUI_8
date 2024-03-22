@@ -7,55 +7,68 @@
     Shell.FlyoutBehavior="Flyout"
     Title="Kyoshin_REI_MAUI_8"
     BackgroundColor="#1f2025"
-    FlyoutBackgroundColor="#1f2025">
+    FlyoutBackgroundColor="#1f2025"
+    FlyoutHeaderBehavior="CollapseOnScroll">
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <Image Aspect="AspectFill"
                    Source="ic_header.png"/>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
-    
+
     <FlyoutItem Title="Home"
-                Icon="home.png">
+            Icon="home.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="Home" />
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="RealTime"
-                Icon="realtime.png">
+            Icon="realtime.png">
         <Tab>
-            <ShellContent ContentTemplate="{DataTemplate local:RealTimePage}" Route="RealTime"/>
+            <ShellContent ContentTemplate="{DataTemplate local:RealTimePage}" 
+                          Title="RealTime"
+                          Route="RealTime"/>
+            <ShellContent ContentTemplate="{DataTemplate local:AccelMonitorPage}"
+                          Title="Graph"
+                          Route="Graph"/>
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="Intensity"
-                Icon="intensity.png">
+            Icon="intensity.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:IntensityPage}" Route="Intensity" />
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="Monitor"
-                Icon="monitor.png">
+            Icon="monitor.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:KyoshinPage}" Route="Monitor"/>
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="Log"
-                Icon="log.png">
+            Icon="log.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:LogPage}" Route="Log" />
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="Tsunami"
-                Icon="tsunami.png">
+            Icon="tsunami.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:TsunamiPage}" Route="Tsunami" />
         </Tab>
     </FlyoutItem>
-    
-    <ShellContent Title="Setting"
-                  Icon="setting.png"
-                  ContentTemplate="{DataTemplate local:SettingPage}"
-                  Route="Setting"/>
+    <FlyoutItem Title="Setting"
+            Icon="setting.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:SettingPage}" Route="Setting"/>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="About"
+        Icon="info.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:InfoPage}" Route="Info"/>
+        </Tab>
+    </FlyoutItem>
 
     <Shell.FlyoutFooterTemplate>
         <DataTemplate>
@@ -79,7 +92,7 @@
                            HorizontalOptions="Start"
                            Grid.Row="0"
                            Grid.Column="0"/>
-                    <Label Text="ver5.3"
+                    <Label Text="ver6.0"
                            TextColor="#ffffff"
                            HorizontalOptions="End"
                            Grid.Row="0"

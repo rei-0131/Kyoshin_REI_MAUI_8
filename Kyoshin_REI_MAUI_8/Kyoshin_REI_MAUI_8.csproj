@@ -136,6 +136,7 @@
 	<ItemGroup>
 		<PackageReference Include="AngleSharp" Version="1.1.2" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="KyoshinMonitorLib" Version="0.4.5.1" />
 		<PackageReference Include="KyoshinMonitorLib.SkiaImages" Version="0.4.5.1" />
 		<PackageReference Include="LiveChartsCore.SkiaSharpView.Maui" Version="2.0.0-rc2" />
@@ -153,6 +154,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="AccelMonitorPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="InfoPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="IntensityPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

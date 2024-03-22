@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Kyoshin_REI_MAUI_8.AccelMonitorPage"
+             Title="AccelMonitorPage"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             xmlns:vms="clr-namespace:Kyoshin_REI_MAUI_8.ViewModels">
+    <ContentPage.BindingContext>
+        <vms:ViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="震度"
+                   TextColor="#ffffff"
+                   HorizontalOptions="End"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"/>
+            <Switch x:Name="monitor_type"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    IsToggled="True"
+                    HorizontalOptions="Center"
+                    Toggled="monitor_type_Toggled"/>
+            <Label Text="加速度"
+                   TextColor="#ffffff"
+                   HorizontalOptions="Start"
+                   Grid.Row="0"
+                   Grid.Column="3"
+                   Grid.ColumnSpan="2"/>
+
+            <lvc:CartesianChart Grid.Row="1" 
+                                Grid.Column="0"
+                                Grid.ColumnSpan="5"
+                                Series="{Binding Series}">
+                
+            </lvc:CartesianChart>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

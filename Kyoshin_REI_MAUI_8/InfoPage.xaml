@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Kyoshin_REI_MAUI_8.InfoPage"
+             Title="Info"
+             BackgroundColor="#1f2025">
+    <ScrollView>
+        <StackLayout
+            Orientation="Vertical">
+            <Label Text="This application was created by REI."
+                   TextColor="#ffffff"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

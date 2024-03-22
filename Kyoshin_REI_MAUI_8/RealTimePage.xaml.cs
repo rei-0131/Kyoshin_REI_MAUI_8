@@ -1,5 +1,8 @@
+using Kyoshin_REI_MAUI_8.ViewModels;
+
 namespace Kyoshin_REI_MAUI_8;
 
+[XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class RealTimePage : ContentPage
 {
     public static double x = 0;
@@ -8,6 +11,13 @@ public partial class RealTimePage : ContentPage
     public static double co_x = 0;
     public static double co_y = 0;
     public static double co_z = 0;
+    public static double ma_x = 0;
+    public static double ma_y = 0;
+    public static double ma_z = 0;
+    public static double gal;
+
+    private bool? isStreaming = false;
+
     public RealTimePage()
     {
         InitializeComponent();
@@ -36,9 +46,23 @@ public partial class RealTimePage : ContentPage
         y_data.Text = (y + co_y).ToString("0.00000");
         z_data.Text = (z + co_z).ToString("0.00000");
 
+        if ((x + co_x) < 0)
+            ma_x = (x + co_x) * -1;
+        else
+            ma_x = (x + co_x);
+        if ((y + co_y) < 0)
+            ma_y = (y + co_y) * -1;
+        else
+            ma_y = (y + co_y);
+        if ((z + co_z) < 0)
+            ma_z = (z + co_z) * -1;
+        else
+            ma_z = (z + co_z);
+
         //100gal = 1m/s
-        double max = Max(x + co_x, y + co_y, z + co_z);
-        double gal = max * 100;
+
+        double max = Max(ma_x, ma_y, ma_z);
+        gal = max * 100;
 
         if (gal < 0.6)
             gal_inten.Text = $"k“x0 {gal}gal";
@@ -96,6 +120,20 @@ public partial class RealTimePage : ContentPage
                 Accelerometer.Default.Stop();
                 Accelerometer.Default.ReadingChanged -= Accelerometer_ReadingChanged;
             }
+        }
+    }
+
+    private async void Button_Clicked(object sender, System.EventArgs e)
+    {
+        var vm = (ViewModel)BindingContext;
+
+        isStreaming = isStreaming is null ? true : !isStreaming;
+
+        while (isStreaming.Value)
+        {
+            vm.RemoveItem();
+            vm.AddItem();
+            await Task.Delay(1000);
         }
     }
 }
