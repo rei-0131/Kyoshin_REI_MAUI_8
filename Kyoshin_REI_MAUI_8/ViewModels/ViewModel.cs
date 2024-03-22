@@ -53,9 +53,7 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
         {
             while (IsReading)
             {
-                await Task.Delay(100);
-
-                if(Geoloc.app_window)
+                if (Geoloc.app_window)
                 {
                     lock (Sync)
                     {
@@ -88,7 +86,10 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
 
                         _customAxis.CustomSeparators = GetSeparators();
                     }
+                    await Task.Delay(100);
                 }
+                else
+                    await Task.Delay(2000);
             }
         }
 
