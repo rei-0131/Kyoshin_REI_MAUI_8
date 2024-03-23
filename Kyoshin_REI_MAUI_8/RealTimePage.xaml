@@ -61,33 +61,12 @@
                     x:Name="gal_inten"
                     HorizontalOptions="Center"
                     TextColor="#ffffff"/>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <Button
-                        x:Name="co_button"
-                        Text="補正"
-                        HorizontalOptions="Center"
-                        TextColor="#ffffff"
-                        Clicked="co_button_Clicked"
-                        Grid.Row="0"
-                        Grid.Column="0"/>
-                <Button
+            <Button
                     x:Name="ss_button"
                     Text="開始/終了"
                     HorizontalOptions="Center"
                     TextColor="#ffffff"
-                    Clicked="ss_button_Clicked"
-                    Grid.Row="0"
-                    Grid.Column="1"/>
-            </Grid>
+                    Clicked="ss_button_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

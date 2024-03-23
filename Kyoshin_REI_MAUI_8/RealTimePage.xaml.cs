@@ -59,17 +59,17 @@ public partial class RealTimePage : ContentPage
         z_data.Text = z.ToString("0.00000");
 
         if ((x + co_x) < 0)
-            ma_x = (x + co_x) * -1;
+            ma_x = x * -1;
         else
-            ma_x = (x + co_x);
+            ma_x = x;
         if ((y + co_y) < 0)
-            ma_y = (y + co_y) * -1;
+            ma_y = y * -1;
         else
-            ma_y = (y + co_y);
+            ma_y = y;
         if ((z + co_z) < 0)
-            ma_z = (z + co_z) * -1;
+            ma_z = z * -1;
         else
-            ma_z = (z + co_z);
+            ma_z = z;
 
         //100gal = 1m/s
 
