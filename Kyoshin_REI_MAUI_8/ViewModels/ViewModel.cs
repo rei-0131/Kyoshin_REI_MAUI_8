@@ -13,7 +13,10 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
 {
     public partial class ViewModel : ObservableObject
     {
+        private string name = "X";
         private readonly List<DateTimePoint> _values = new();
+        private readonly List<DateTimePoint> _values2 = new();
+        private readonly List<DateTimePoint> _values3 = new();
         private readonly DateTimeAxis _customAxis;
 
         public ViewModel()
@@ -22,9 +25,29 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
             {
                 new LineSeries<DateTimePoint>
                 {
+                    Name = name,
                     Values = _values,
                     Fill = null,
                     GeometryFill = null,
+                    Stroke = new SolidColorPaint(SKColors.Red),
+                    GeometryStroke = null
+                },
+                new LineSeries<DateTimePoint>
+                {
+                    Name = "Y",
+                    Values = _values2,
+                    Fill = null,
+                    GeometryFill = null,
+                    Stroke = new SolidColorPaint(SKColors.GreenYellow),
+                    GeometryStroke = null
+                },
+                new LineSeries<DateTimePoint>
+                {
+                    Name = "Z",
+                    Values = _values3,
+                    Fill = null,
+                    GeometryFill = null,
+                    Stroke = new SolidColorPaint(SKColors.Blue),
                     GeometryStroke = null
                 }
             };
@@ -58,30 +81,43 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
                     lock (Sync)
                     {
                         var itemValue = 0.0;
+                        var itemValue2 = 0.0;
+                        var itemValue3 = 0.0;
                         if (AccelMonitorPage.monitor_type_)
-                            itemValue = RealTimePage.gal;
+                        {
+                            name = "X";
+                            itemValue = RealTimePage.ma_x;
+                            itemValue2 = RealTimePage.ma_y;
+                            itemValue3 = RealTimePage.ma_z;
+                            _values.Add(new DateTimePoint(DateTime.Now, itemValue));
+                            _values2.Add(new DateTimePoint(DateTime.Now, itemValue2));
+                            _values3.Add(new DateTimePoint(DateTime.Now, itemValue3));
+                        }
                         else
+                        {
+                            name = "震度";
                             if (RealTimePage.gal < 0.6)
-                            itemValue = 0;
-                        else if (RealTimePage.gal < 1.9)
-                            itemValue = 1;
-                        else if (RealTimePage.gal < 6)
-                            itemValue = 2;
-                        else if (RealTimePage.gal < 19)
-                            itemValue = 3;
-                        else if (RealTimePage.gal < 60)
-                            itemValue = 4;
-                        else if (RealTimePage.gal < 110)
-                            itemValue = 5;
-                        else if (RealTimePage.gal < 190)
-                            itemValue = 5.5;
-                        else if (RealTimePage.gal < 340)
-                            itemValue = 6;
-                        else if (RealTimePage.gal < 600)
-                            itemValue = 6.5;
-                        else if (RealTimePage.gal >= 600)
-                            itemValue = 7;
-                        _values.Add(new DateTimePoint(DateTime.Now, itemValue));
+                                itemValue = 0;
+                            else if (RealTimePage.gal < 1.9)
+                                itemValue = 1;
+                            else if (RealTimePage.gal < 6)
+                                itemValue = 2;
+                            else if (RealTimePage.gal < 19)
+                                itemValue = 3;
+                            else if (RealTimePage.gal < 60)
+                                itemValue = 4;
+                            else if (RealTimePage.gal < 110)
+                                itemValue = 5;
+                            else if (RealTimePage.gal < 190)
+                                itemValue = 5.5;
+                            else if (RealTimePage.gal < 340)
+                                itemValue = 6;
+                            else if (RealTimePage.gal < 600)
+                                itemValue = 6.5;
+                            else if (RealTimePage.gal >= 600)
+                                itemValue = 7;
+                            _values.Add(new DateTimePoint(DateTime.Now, itemValue));
+                        }
                         if (_values.Count > 250) _values.RemoveAt(0);
 
                         _customAxis.CustomSeparators = GetSeparators();
@@ -114,7 +150,7 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
 
             return secsAgo < 1
                 ? "now"
-                : $"{secsAgo:N0}s ago";
+                : $"{secsAgo:N0}s";
         }
     }
 }
