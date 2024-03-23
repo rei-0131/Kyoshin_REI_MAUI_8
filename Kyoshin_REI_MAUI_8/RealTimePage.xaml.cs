@@ -1,6 +1,3 @@
-using Kyoshin_REI_MAUI_8.ViewModels;
-using System.Numerics;
-
 namespace Kyoshin_REI_MAUI_8;
 
 [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -12,15 +9,10 @@ public partial class RealTimePage : ContentPage
     public static double x_ = 0;
     public static double y_ = 0;
     public static double z_ = 0;
-    public static double co_x = 0;
-    public static double co_y = 0;
-    public static double co_z = 0;
     public static double ma_x = 0;
     public static double ma_y = 0;
     public static double ma_z = 0;
     public static double gal;
-
-    private bool? isStreaming = false;
 
     public RealTimePage()
     {
@@ -58,15 +50,15 @@ public partial class RealTimePage : ContentPage
         y_data.Text = y.ToString("0.00000");
         z_data.Text = z.ToString("0.00000");
 
-        if ((x + co_x) < 0)
+        if (x < 0)
             ma_x = x * -1;
         else
             ma_x = x;
-        if ((y + co_y) < 0)
+        if (y < 0)
             ma_y = y * -1;
         else
             ma_y = y;
-        if ((z + co_z) < 0)
+        if (z < 0)
             ma_z = z * -1;
         else
             ma_z = z;
@@ -109,13 +101,6 @@ public partial class RealTimePage : ContentPage
 
         }
         return max;
-    }
-
-    private void co_button_Clicked(object sender, EventArgs e)
-    {
-        co_x = x * -1;
-        co_y = y * -1;
-        co_z = z * -1;
     }
 
     private void ss_button_Clicked(object sender, EventArgs e)
