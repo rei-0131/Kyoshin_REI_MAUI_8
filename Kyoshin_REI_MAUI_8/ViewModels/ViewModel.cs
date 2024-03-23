@@ -86,9 +86,9 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
                         if (AccelMonitorPage.monitor_type_)
                         {
                             name = "X";
-                            itemValue = Math.Round(RealTimePage.ma_x, 4);
-                            itemValue2 = Math.Round(RealTimePage.ma_y, 4);
-                            itemValue3 = Math.Round(RealTimePage.ma_z, 4);
+                            itemValue = Math.Round(RealTimePage.ma_x, 3);
+                            itemValue2 = Math.Round(RealTimePage.ma_y, 3);
+                            itemValue3 = Math.Round(RealTimePage.ma_z, 3);
                             _values.Add(new DateTimePoint(DateTime.Now, itemValue));
                             _values2.Add(new DateTimePoint(DateTime.Now, itemValue2));
                             _values3.Add(new DateTimePoint(DateTime.Now, itemValue3));

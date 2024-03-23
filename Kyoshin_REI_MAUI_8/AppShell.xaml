@@ -92,7 +92,7 @@
                            HorizontalOptions="Start"
                            Grid.Row="0"
                            Grid.Column="0"/>
-                    <Label Text="ver6.2"
+                    <Label Text="ver6.3"
                            TextColor="#ffffff"
                            HorizontalOptions="End"
                            Grid.Row="0"
