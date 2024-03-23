@@ -86,9 +86,9 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
                         if (AccelMonitorPage.monitor_type_)
                         {
                             name = "X";
-                            itemValue = RealTimePage.ma_x;
-                            itemValue2 = RealTimePage.ma_y;
-                            itemValue3 = RealTimePage.ma_z;
+                            itemValue = Math.Round(RealTimePage.ma_x, 4);
+                            itemValue2 = Math.Round(RealTimePage.ma_y, 4);
+                            itemValue3 = Math.Round(RealTimePage.ma_z, 4);
                             _values.Add(new DateTimePoint(DateTime.Now, itemValue));
                             _values2.Add(new DateTimePoint(DateTime.Now, itemValue2));
                             _values3.Add(new DateTimePoint(DateTime.Now, itemValue3));
@@ -117,8 +117,12 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
                             else if (RealTimePage.gal >= 600)
                                 itemValue = 7;
                             _values.Add(new DateTimePoint(DateTime.Now, itemValue));
+                            _values2.Add(new DateTimePoint(DateTime.Now, itemValue));
+                            _values3.Add(new DateTimePoint(DateTime.Now, itemValue));
                         }
                         if (_values.Count > 250) _values.RemoveAt(0);
+                        if (_values2.Count > 250) _values2.RemoveAt(0);
+                        if (_values3.Count > 250) _values3.RemoveAt(0);
 
                         _customAxis.CustomSeparators = GetSeparators();
                     }
