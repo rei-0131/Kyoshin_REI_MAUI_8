@@ -86,9 +86,9 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
                         if (AccelMonitorPage.monitor_type_)
                         {
                             name = "X";
-                            itemValue = Math.Round(RealTimePage.ma_x, 3);
-                            itemValue2 = Math.Round(RealTimePage.ma_y, 3);
-                            itemValue3 = Math.Round(RealTimePage.ma_z, 3);
+                            itemValue = Math.Round(RealTimePage.sum_x, 3);
+                            itemValue2 = Math.Round(RealTimePage.sum_y, 3);
+                            itemValue3 = Math.Round(RealTimePage.sum_z, 3);
                             _values.Add(new DateTimePoint(DateTime.Now, itemValue));
                             _values2.Add(new DateTimePoint(DateTime.Now, itemValue2));
                             _values3.Add(new DateTimePoint(DateTime.Now, itemValue3));
@@ -96,26 +96,27 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
                         else
                         {
                             name = "震度";
-                            if (RealTimePage.gal < 0.6)
+                            /*if (RealTimePage.intensity < 0.5)
                                 itemValue = 0;
-                            else if (RealTimePage.gal < 1.9)
+                            else if (RealTimePage.intensity < 1.5)
                                 itemValue = 1;
-                            else if (RealTimePage.gal < 6)
+                            else if (RealTimePage.intensity < 2.5)
                                 itemValue = 2;
-                            else if (RealTimePage.gal < 19)
+                            else if (RealTimePage.intensity < 3.5)
                                 itemValue = 3;
-                            else if (RealTimePage.gal < 60)
+                            else if (RealTimePage.intensity < 4.5)
                                 itemValue = 4;
-                            else if (RealTimePage.gal < 110)
+                            else if (RealTimePage.intensity < 5)
                                 itemValue = 5;
-                            else if (RealTimePage.gal < 190)
+                            else if (RealTimePage.intensity < 5.5)
                                 itemValue = 5.5;
-                            else if (RealTimePage.gal < 340)
+                            else if (RealTimePage.intensity < 6)
                                 itemValue = 6;
-                            else if (RealTimePage.gal < 600)
+                            else if (RealTimePage.intensity < 6.5)
                                 itemValue = 6.5;
-                            else if (RealTimePage.gal >= 600)
-                                itemValue = 7;
+                            else if (RealTimePage.intensity >= 6.5)
+                                itemValue = 7;*/
+                            itemValue = RealTimePage.intensity;
                             _values.Add(new DateTimePoint(DateTime.Now, itemValue));
                             _values2.Add(new DateTimePoint(DateTime.Now, itemValue));
                             _values3.Add(new DateTimePoint(DateTime.Now, itemValue));
