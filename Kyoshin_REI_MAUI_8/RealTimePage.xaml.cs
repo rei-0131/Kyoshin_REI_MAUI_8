@@ -56,11 +56,11 @@ public partial class RealTimePage : ContentPage
         y = e.Reading.Acceleration.Y;
         z = e.Reading.Acceleration.Z;
         Array.Resize(ref x_list, x_list.Length + 1);
-        x_list[x_list.Length - 1] = x;
+        x_list[x_list.Length - 1] = x * 100;
         Array.Resize(ref y_list, y_list.Length + 1);
-        y_list[y_list.Length - 1] = y;
+        y_list[y_list.Length - 1] = y * 100;
         Array.Resize(ref z_list, z_list.Length + 1);
-        z_list[z_list.Length - 1] = z;
+        z_list[z_list.Length - 1] = z * 100;
 
         if (x_list.Length == 150)
         {

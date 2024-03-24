@@ -96,27 +96,31 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
                         else
                         {
                             name = "震度";
-                            /*if (RealTimePage.intensity < 0.5)
-                                itemValue = 0;
-                            else if (RealTimePage.intensity < 1.5)
-                                itemValue = 1;
-                            else if (RealTimePage.intensity < 2.5)
-                                itemValue = 2;
-                            else if (RealTimePage.intensity < 3.5)
-                                itemValue = 3;
-                            else if (RealTimePage.intensity < 4.5)
-                                itemValue = 4;
-                            else if (RealTimePage.intensity < 5)
-                                itemValue = 5;
-                            else if (RealTimePage.intensity < 5.5)
-                                itemValue = 5.5;
-                            else if (RealTimePage.intensity < 6)
-                                itemValue = 6;
-                            else if (RealTimePage.intensity < 6.5)
-                                itemValue = 6.5;
-                            else if (RealTimePage.intensity >= 6.5)
-                                itemValue = 7;*/
-                            itemValue = RealTimePage.intensity;
+                            if(AccelMonitorPage.intensity_type_)
+                            {
+                                if (RealTimePage.intensity < 0.5)
+                                    itemValue = 0;
+                                else if (RealTimePage.intensity < 1.5)
+                                    itemValue = 1;
+                                else if (RealTimePage.intensity < 2.5)
+                                    itemValue = 2;
+                                else if (RealTimePage.intensity < 3.5)
+                                    itemValue = 3;
+                                else if (RealTimePage.intensity < 4.5)
+                                    itemValue = 4;
+                                else if (RealTimePage.intensity < 5)
+                                    itemValue = 5;
+                                else if (RealTimePage.intensity < 5.5)
+                                    itemValue = 5.5;
+                                else if (RealTimePage.intensity < 6)
+                                    itemValue = 6;
+                                else if (RealTimePage.intensity < 6.5)
+                                    itemValue = 6.5;
+                                else if (RealTimePage.intensity >= 6.5)
+                                    itemValue = 7;
+                            }
+                            else
+                                itemValue = RealTimePage.intensity;
                             _values.Add(new DateTimePoint(DateTime.Now, itemValue));
                             _values2.Add(new DateTimePoint(DateTime.Now, itemValue));
                             _values3.Add(new DateTimePoint(DateTime.Now, itemValue));

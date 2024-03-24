@@ -13,6 +13,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
@@ -43,7 +44,26 @@
                    Grid.Column="3"
                    Grid.ColumnSpan="2"/>
 
-            <lvc:CartesianChart Grid.Row="1" 
+            <Label Text="震度"
+                   TextColor="#ffffff"
+                   HorizontalOptions="End"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"/>
+            <Switch x:Name="intensity_type"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    IsToggled="True"
+                    HorizontalOptions="Center"
+                    Toggled="intensity_type_Toggled"/>
+            <Label Text="計測震度"
+                   TextColor="#ffffff"
+                   HorizontalOptions="Start"
+                   Grid.Row="0"
+                   Grid.Column="3"
+                   Grid.ColumnSpan="2"/>
+
+            <lvc:CartesianChart Grid.Row="2" 
                                 Grid.Column="0"
                                 Grid.ColumnSpan="5"
                                 SyncContext="{Binding Sync}"
