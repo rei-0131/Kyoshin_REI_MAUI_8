@@ -17,6 +17,7 @@ public partial class RealTimePage : ContentPage
     public static double T = 0.02;
     public static int len = 150;
     public static int length = 0;
+    public static double a_ = 0;
     public static double intensity = 0;
     float[] x_list = new float[len];
     float[] y_list = new float[len];
@@ -88,9 +89,9 @@ public partial class RealTimePage : ContentPage
             {
                 comp_xyz.Add(Math.Sqrt(Math.Pow(Convert.ToSingle(filter_x[i]), 2) + Math.Pow(Convert.ToSingle(filter_y[i]), 2) + Math.Pow(Convert.ToSingle(filter_z[i]), 2)));
             }
-            double a = Search_Aval(comp_xyz, T);
+            a_ = Search_Aval(comp_xyz, T);
 
-            intensity = Math.Floor(Math.Round(2 * Math.Log10(a) + 0.94, 4, MidpointRounding.AwayFromZero) * 100) / 100;
+            intensity = Math.Floor(Math.Round(2 * Math.Log10(a_) + 0.94, 4, MidpointRounding.AwayFromZero) * 100) / 100;
 
             x_list = new float[len];
             y_list = new float[len];
@@ -106,38 +107,25 @@ public partial class RealTimePage : ContentPage
         //100gal = 1m/s
 
         if (intensity < 0.5)
-            gal_inten.Text = $"êkìx0 {intensity.ToString("0.00")}gal";
+            gal_inten.Text = $"êkìx0 {a_.ToString("0.00")}gal";
         else if(intensity < 1.5)
-            gal_inten.Text = $"êkìx1 {intensity.ToString("0.00")}gal";
+            gal_inten.Text = $"êkìx1 {a_.ToString("0.00")}gal";
         else if(intensity < 2.5)
-            gal_inten.Text = $"êkìx2 {intensity.ToString("0.00")}gal";
+            gal_inten.Text = $"êkìx2 {a_.ToString("0.00")}gal";
         else if(intensity < 3.5)
-            gal_inten.Text = $"êkìx3 {intensity.ToString("0.00")}gal";
+            gal_inten.Text = $"êkìx3 {a_.ToString("0.00")}gal";
         else if(intensity < 4.5)
-            gal_inten.Text = $"êkìx4 {intensity.ToString("0.00")}gal";
+            gal_inten.Text = $"êkìx4 {a_.ToString("0.00")}gal";
         else if(intensity < 5)
-            gal_inten.Text = $"êkìx5é„ {intensity.ToString("0.00")}gal";
+            gal_inten.Text = $"êkìx5é„ {a_.ToString("0.00")}gal";
         else if(intensity < 5.5)
-            gal_inten.Text = $"êkìx5ã≠ {intensity.ToString("0.00")}gal";
+            gal_inten.Text = $"êkìx5ã≠ {a_.ToString("0.00")}gal";
         else if(intensity < 6)
-            gal_inten.Text = $"êkìx6é„ {intensity.ToString("0.00")}gal";
+            gal_inten.Text = $"êkìx6é„ {a_.ToString("0.00")}gal";
         else if(intensity < 6.5)
-            gal_inten.Text = $"êkìx6ã≠ {intensity.ToString("0.00")}gal";
+            gal_inten.Text = $"êkìx6ã≠ {a_.ToString("0.00")}gal";
         else if(intensity >= 6.5)
-            gal_inten.Text = $"êkìx7 {intensity.ToString("0.00")}gal";
-    }
-
-    public T Max<T>(params T[] nums) where T : IComparable
-    {
-        if (nums.Length == 0) return default(T);
-
-        T max = nums[0];
-        for (int i = 1; i < nums.Length; i++)
-        {
-            max = max.CompareTo(nums[i]) > 0 ? max : nums[i];
-
-        }
-        return max;
+            gal_inten.Text = $"êkìx7 {a_.ToString("0.00")}gal";
     }
 
     private void ss_button_Clicked(object sender, EventArgs e)

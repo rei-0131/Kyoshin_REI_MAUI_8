@@ -96,7 +96,7 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
                         else
                         {
                             name = "震度";
-                            if(AccelMonitorPage.intensity_type_)
+                            if(!AccelMonitorPage.intensity_type_)
                             {
                                 if (RealTimePage.intensity < 0.5)
                                     itemValue = 0;
