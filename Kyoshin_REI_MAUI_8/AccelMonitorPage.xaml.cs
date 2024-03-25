@@ -10,7 +10,11 @@ public partial class AccelMonitorPage : ContentPage
     public AccelMonitorPage()
 	{
 		InitializeComponent();
-	}
+        if (!monitor_type.IsToggled)
+            intensity_type.IsEnabled = true;
+        else
+            intensity_type.IsEnabled = false;
+    }
 
     private void monitor_type_Toggled(object sender, ToggledEventArgs e)
     {

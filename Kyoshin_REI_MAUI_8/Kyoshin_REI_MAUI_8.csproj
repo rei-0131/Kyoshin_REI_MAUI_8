@@ -37,9 +37,15 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<PlatformTarget>AnyCPU</PlatformTarget>
+		<Platforms>AnyCPU;x64</Platforms>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
+	  <ApplicationId>com.rei.kyoshin-rei-maui</ApplicationId>
+	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|x64'">
 	  <ApplicationId>com.rei.kyoshin-rei-maui</ApplicationId>
 	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
 	</PropertyGroup>
@@ -49,7 +55,17 @@
 	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|x64'">
+	  <ApplicationId>com.rei.kyoshin-rei-maui</ApplicationId>
+	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
+	  <ApplicationId>com.rei.kyoshin-rei-maui</ApplicationId>
+	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|x64'">
 	  <ApplicationId>com.rei.kyoshin-rei-maui</ApplicationId>
 	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
 	</PropertyGroup>
@@ -59,7 +75,17 @@
 	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|x64'">
+	  <ApplicationId>com.rei.kyoshin-rei-maui</ApplicationId>
+	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
+	  <ApplicationId>com.rei.kyoshin-rei-maui</ApplicationId>
+	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|x64'">
 	  <ApplicationId>com.rei.kyoshin-rei-maui</ApplicationId>
 	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
 	</PropertyGroup>
@@ -69,12 +95,27 @@
 	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|x64'">
+	  <ApplicationId>com.rei.kyoshin-rei-maui</ApplicationId>
+	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
 	  <ApplicationId>com.rei.kyoshin-rei-maui</ApplicationId>
 	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|x64'">
+	  <ApplicationId>com.rei.kyoshin-rei-maui</ApplicationId>
+	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationId>com.rei.kyoshin-rei-maui</ApplicationId>
+	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|x64'">
 	  <ApplicationId>com.rei.kyoshin-rei-maui</ApplicationId>
 	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
 	</PropertyGroup>
@@ -87,7 +128,24 @@
 	  <EnableLLVM>False</EnableLLVM>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android34.0|x64'">
+	  <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
+	  <RunAOTCompilation>True</RunAOTCompilation>
+	  <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
+	  <EnableLLVM>False</EnableLLVM>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android34.0|AnyCPU'">
+	  <DebugSymbols>True</DebugSymbols>
+	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
+	  <AndroidLinkTool>r8</AndroidLinkTool>
+	  <RunAOTCompilation>True</RunAOTCompilation>
+	  <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
+	  <EnableLLVM>False</EnableLLVM>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android34.0|x64'">
 	  <DebugSymbols>True</DebugSymbols>
 	  <ApplicationTitle>Kyoshin_REI_MAUI</ApplicationTitle>
 	  <AndroidLinkTool>r8</AndroidLinkTool>
@@ -145,6 +203,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.10" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="8.0.10" />
+		<PackageReference Include="Numpy" Version="3.11.1.33" />
 		<PackageReference Include="Plugin.LocalNotification" Version="11.1.1" />
 		<PackageReference Include="Plugin.Permissions" Version="6.0.1" />
 	</ItemGroup>
