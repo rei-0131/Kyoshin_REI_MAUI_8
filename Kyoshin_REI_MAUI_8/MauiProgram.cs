@@ -64,18 +64,19 @@ namespace Kyoshin_REI_MAUI_8
                         {
                             Id = "BackGround_None_Notice",
                             Name = "BackGround_None_Notice",
-                            Description = "General"
+                            Description = "General",
+                            Sound = "earlywarning"
                         });
                         android.AddChannel(new NotificationChannelRequest
                         {
                             Id = "BackGround_Warning_Notice",
                             Name = "BackGround_Warning_Notice",
                             Description = "Special",
-                            Sound = "early_warning"
+                            Sound = "earlywarning"
                         });
                         android.AddChannel(new NotificationChannelRequest
                         {
-                            Sound = "early_warning"
+                            Sound = "earlywarning"
                         });
                     });
                 })
@@ -276,7 +277,7 @@ namespace Kyoshin_REI_MAUI_8
                                 }
                             };
                             if (result_eew.Data.AlertFlag == "警報")
-                                request_.Sound = DeviceInfo.Platform == DevicePlatform.Android ? "early_warning" : "early_warning.mp3";
+                                request_.Sound = DeviceInfo.Platform == DevicePlatform.Android ? "earlywarning" : "earlywarning.mp3";
 
                             await LocalNotificationCenter.Current.Show(request_);
                         }
@@ -290,7 +291,7 @@ namespace Kyoshin_REI_MAUI_8
                         Title = "緊急地震速報は発表されていません。",
                         Subtitle = $"{DateTime.ParseExact(result_eew.Data.RequestTime, "yyyyMMddHHmmss", null).ToString("yyyy/MM/dd HH:mm:ss")}",
                         Description = "",
-                        //Sound = DeviceInfo.Platform == DevicePlatform.Android ? "early_warning" : "early_warning.mp3",
+                        //Sound = DeviceInfo.Platform == DevicePlatform.Android ? "earlywarning" : "earlywarning.mp3",
                         CategoryType = NotificationCategoryType.Status,
                         Android =
                         {

@@ -154,6 +154,10 @@
 	  <EnableLLVM>False</EnableLLVM>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<UseInterpreter>false</UseInterpreter>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
                 <MauiIcon Include="Resources\AppIcon\ic_launcher.png" />
@@ -182,6 +186,7 @@
 
 	<ItemGroup>
 	  <None Remove="Platforms\Android\AndroidManifest.xml" />
+	  <None Remove="Platforms\Android\Resources\Raw\earlywarning.mp3" />
 	  <None Remove="Platforms\Android\Resources\Raw\early_warning.mp3" />
 	  <None Remove="Resources\AppIcon\ic_launcher.png" />
 	  <None Remove="Resources\Splash\splash.svg" />
@@ -189,6 +194,10 @@
 
 	<ItemGroup>
 		<AndroidResource Remove="Platforms\Android\Raw\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiAsset Include="Platforms\Android\Resources\Raw\earlywarning.mp3" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -210,7 +219,6 @@
 
 	<ItemGroup>
 	  <Page Include="Platforms\Android\AndroidManifest.xml" />
-	  <Page Include="Platforms\Android\Resources\Raw\early_warning.mp3" />
 	</ItemGroup>
 
 	<ItemGroup>
