@@ -1,7 +1,9 @@
-﻿using Android.App;
+﻿#if ANDROID
+using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+#endif
 using CommunityToolkit.Maui;
 using KyoshinMonitorLib;
 using KyoshinMonitorLib.ApiResult.WebApi;
@@ -22,6 +24,7 @@ namespace Kyoshin_REI_MAUI_8
                 .UseMauiApp<App>()
                 .UseSkiaSharp(true)
                 .UseMauiCommunityToolkit()
+#if ANDROID
                 .UseLocalNotification(config =>
                 {
                     config.AddCategory(new NotificationCategory(NotificationCategoryType.Status)
@@ -80,12 +83,12 @@ namespace Kyoshin_REI_MAUI_8
                         });
                     });
                 })
+#endif
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-
             /// Add dependecy injection to main page
             builder.Services.AddSingleton<MainPage>();
 
@@ -105,7 +108,7 @@ namespace Kyoshin_REI_MAUI_8
         void Start();
         void Stop();
     }
-
+#if ANDROID
     [Service(ForegroundServiceType = global::Android.Content.PM.ForegroundService.TypeSpecialUse)]
     public class BackServices : Service, IServiceTest
     {
@@ -340,4 +343,5 @@ namespace Kyoshin_REI_MAUI_8
             MainActivity.ActivityCurrent.StartService(stopIntent);
         }
     }
+#endif
 }

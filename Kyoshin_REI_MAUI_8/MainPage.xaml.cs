@@ -7,8 +7,6 @@ using System.Diagnostics;
 
 namespace Kyoshin_REI_MAUI_8
 {
-    //ディレクトリの問題なのか通知音が変わらない
-
     static class Geoloc
     {
         public static double my_lat;
@@ -154,14 +152,15 @@ namespace Kyoshin_REI_MAUI_8
                 Debug.WriteLine("ShindoObsPoints.mpk.lz4の存在を確認");
             }
             TravelTimeTableConverter.ImportData();
-
+#if ANDROID
             Per_req();
             Now_loc();
+#endif
             await Task.Delay(1000);
             Geteew();
             GetPoint();
         }
-
+#if ANDROID
         private async void Per_req()
         {
             PermissionStatus status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
@@ -180,7 +179,7 @@ namespace Kyoshin_REI_MAUI_8
                 await Task.Delay(1000);
             }
         }
-
+#endif
         private void Now_button_Clicked(object sender, EventArgs e)
         {
             Geoloc.gettime = Preferences.Default.Get("gettime", -2);
@@ -188,9 +187,11 @@ namespace Kyoshin_REI_MAUI_8
 
         private void Loc_button_click(object sender, EventArgs e)
         {
+#if ANDROID
             Now_loc();
+#endif
         }
-
+#if ANDROID
         private async void Start_BackService()
         {
             if(Geoloc.back_op)
@@ -204,15 +205,18 @@ namespace Kyoshin_REI_MAUI_8
                 serviceInstance.Stop();
             }
         }
-
+#endif
         private async void Geteew()
         {
             Disp();
+#if ANDROID
             Start_BackService();
+#endif
             while (true)
             {
                 if(Geoloc.app_window)
                 {
+#if ANDROID
                     IEnumerable<ConnectionProfile> profiles = Connectivity.Current.ConnectionProfiles;
 
                     if (profiles.Contains(ConnectionProfile.WiFi))
@@ -223,7 +227,7 @@ namespace Kyoshin_REI_MAUI_8
                     {
                         warning_msg.Text = "モバイル通信を使用中";
                     }
-
+#endif
                     try
                     {
                         using var webApi = new WebApi();
@@ -254,8 +258,11 @@ namespace Kyoshin_REI_MAUI_8
 
         private async void Disp()
         {
+            //*****最重要*****
+            //*****地震発生時にrequest_eew.Data.RequestTimeの書式がyyyyMMddHHmmssではなく以下の様になる現象を確認
+            //"202404020426%s" (yyyyMMddHHmm%s) request_eew.Data.RequestTimeから参照する際に例外処理を追加*****
             ImageSource bitmap_null = ImageSource.FromFile("s_null.png");
-            now_time_date = DateTime.Now.AddSeconds(Geoloc.gettime);
+            now_time_date = DateTime.Now;
             targetTime = now_time_date.AddSeconds(Geoloc.gettime);
             now_time.Text = now_time_date.ToString("yyyy/MM/dd HH:mm:ss");
             bool ch_red = false;
@@ -263,15 +270,25 @@ namespace Kyoshin_REI_MAUI_8
             {
                 if(Geoloc.app_window)
                 {
-                    now_time_date = DateTime.Now.AddSeconds(Geoloc.gettime);
+                    now_time_date = DateTime.Now;
                     targetTime = now_time_date.AddSeconds(Geoloc.gettime);
                     now_time.Text = now_time_date.ToString("yyyy/MM/dd HH:mm:ss");
                     //System.Diagnostics.Debug.WriteLine(targetTime.ToString("yyyy/MM/dd HH:mm:ss"));
 
                     if (result_eew != null)
                     {
-                        get_time.Text = DateTime.ParseExact(result_eew.Data.RequestTime, "yyyyMMddHHmmss", null).ToString("yyyy/MM/dd HH:mm:ss");
-                        var dTime = DateTime.ParseExact(result_eew.Data.RequestTime, "yyyyMMddHHmmss", null);
+                        var req_time = "";
+                        try
+                        {
+                            var tmp_data = DateTime.ParseExact(result_eew.Data.RequestTime, "yyyyMMddHHmmss", null).ToString("yyyy/MM/dd HH:mm:ss");
+                            req_time = result_eew.Data.RequestTime;
+                        }
+                        catch
+                        {
+                            req_time = targetTime.ToString("yyyyMMddHHmmss");
+                        }
+                        get_time.Text = DateTime.ParseExact(req_time, "yyyyMMddHHmmss", null).ToString("yyyy/MM/dd HH:mm:ss");
+                        var dTime = DateTime.ParseExact(req_time, "yyyyMMddHHmmss", null);
                         if ((targetTime - dTime).TotalSeconds >= 10 && !ch_red)
                         {
                             get_time.TextColor = Microsoft.Maui.Graphics.Color.FromRgb(255, 0, 0);
@@ -744,7 +761,7 @@ namespace Kyoshin_REI_MAUI_8
                 await Task.Delay(Geoloc.realtime_in);
             }
         }
-
+#if ANDROID
         private async void Now_loc()
         {
             var request_ = new NotificationRequest
@@ -913,7 +930,7 @@ namespace Kyoshin_REI_MAUI_8
                 LocalNotificationCenter.Current.Show(request_);
             }
         }
-
+#endif
         public static double CalculateDistance(double lat1, double lon1, float lat2, float lon2)
         {
             double radius = 6371;

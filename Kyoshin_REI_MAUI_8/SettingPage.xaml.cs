@@ -51,14 +51,14 @@ public partial class SettingPage : ContentPage
             Geoloc.gettime_point = int.Parse(gettime_point_entry.Text);
             Geoloc.eew_in = int.Parse(eew_interval_entry.Text);
             Geoloc.realtime_in = int.Parse(realtime_interval_entry.Text);
-
+#if ADNROID
             if(Geoloc.back_in != int.Parse(back_interval_entry.Text) && back_op.IsToggled)
             {
                 var serviceInstance = new BackServices();
                 serviceInstance.Stop();
                 serviceInstance.Start();
             }
-
+#endif
             Geoloc.back_in = int.Parse(back_interval_entry.Text);
             Geoloc.kyoshin_in = int.Parse(kyoshin_interval_entry.Text);
             Geoloc.ps_cal = int.Parse(ps_entry.Text);
@@ -72,6 +72,7 @@ public partial class SettingPage : ContentPage
 			else
                 Geoloc.get_log = int.Parse(log_entry.Text);
             Geoloc.off_kyoshin = int.Parse(kyoshin_entry.Text);
+            KyoshinPage.add_sc = Geoloc.off_kyoshin;
 
             Geoloc.off_ps = off_ps.IsToggled;
 			Geoloc.back_op = back_op.IsToggled;
@@ -108,7 +109,8 @@ public partial class SettingPage : ContentPage
                 traffic_label.Text = (hour_traffic / 1024 / 1024 / 1024).ToString("0.000") + "GB/h  ";
             }
             message_setting.Text = $"[{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}] ê›íËïœçXê¨å˜";
-			if(Geoloc.back_op)
+#if ANDROID
+            if(Geoloc.back_op)
 			{
                 var serviceInstance = new BackServices();
                 serviceInstance.Start();
@@ -118,6 +120,7 @@ public partial class SettingPage : ContentPage
                 var serviceInstance = new BackServices();
                 serviceInstance.Stop();
             }
+#endif
         }
 		catch(Exception ex)
 		{

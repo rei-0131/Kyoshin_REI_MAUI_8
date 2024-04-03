@@ -1,4 +1,6 @@
+#if ANDROID
 using MathNet.Numerics.IntegralTransforms;
+#endif
 
 namespace Kyoshin_REI_MAUI_8;
 
@@ -26,10 +28,11 @@ public partial class RealTimePage : ContentPage
     public RealTimePage()
     {
         InitializeComponent();
-
+#if ANDROID
         Sensor_Data();
+#endif
     }
-
+#if ANDROID
     private void Sensor_Data()
     {
         if (Accelerometer.Default.IsSupported)
@@ -223,4 +226,5 @@ public partial class RealTimePage : ContentPage
 
         return filter;
     }
+#endif
 }

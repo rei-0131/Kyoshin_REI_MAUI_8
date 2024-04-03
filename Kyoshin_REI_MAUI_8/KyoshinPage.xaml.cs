@@ -41,7 +41,6 @@ public partial class KyoshinPage : ContentPage
                 }
 
                 var targettime = DateTime.Now.AddSeconds(add_sc);
-                Debug.WriteLine(add_sc);
                 if (kyoshin_type.IsToggled)
                     image_flo = ImageSource.FromUri(new Uri($"http://www.kmoni.bosai.go.jp/data/map_img/RealTimeImg/jma_s/{targettime.ToString("yyyyMMdd")}/{targettime.ToString("yyyyMMddHHmmss")}.jma_s.gif"));
                 else

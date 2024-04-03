@@ -1,6 +1,7 @@
 using CommunityToolkit.Maui.Alerts;
 using System.Text.RegularExpressions;
 using AngleSharp;
+using System.Diagnostics;
 
 namespace Kyoshin_REI_MAUI_8;
 
@@ -62,62 +63,68 @@ public partial class LogPage : ContentPage
         {
             if (i != 0 && i != trNodes.Length - 1)
             {
-                var tdNodes = trNodes[i].GetElementsByTagName("td");
-                var day_str = tdNodes[0].QuerySelector("a").TextContent;
-                var year = Regex.Match(day_str, "(.*?)年").ToString();
-                var month = Regex.Match(day_str = day_str.Replace(year, ""), "(.*?)月").ToString();
-                var day = Regex.Match(day_str = day_str.Replace(month, ""), "(.*?)日").ToString();
-                var hour = Regex.Match(day_str = day_str.Replace(day + " ", ""), "(.*?)時").ToString();
-                var minute = Regex.Match(day_str.Replace(hour, ""), "(.*?)分").ToString();
-                year = year.Replace("年", "");
-                month = month.Replace("月", "");
-                day = day.Replace("日", "");
-                hour = hour.Replace("時", "");
-                minute = minute.Replace("分", "");
-                var day_id = new DateTime(int.Parse(year), int.Parse(month), int.Parse(day), int.Parse(hour), int.Parse(minute), 0).ToString("yyyy/MM/dd HH:mm:ss");
-                var location = tdNodes[1].TextContent;
-                var mag = tdNodes[2].TextContent;
-                var max_intensity = tdNodes[3].TextContent;
-
-                if (max_intensity == "---")
+                try
                 {
-                    quake_list.Add(new List<string>() { "s_0.png", day_id, $"{location}   M{mag}" });
+                    var tdNodes = trNodes[i].GetElementsByTagName("td");
+                    var day_str = tdNodes[0].QuerySelector("a").TextContent;
+                    var year = Regex.Match(day_str, "(.*?)年").ToString();
+                    var month = Regex.Match(day_str = day_str.Replace(year, ""), "(.*?)月").ToString();
+                    var day = Regex.Match(day_str = day_str.Replace(month, ""), "(.*?)日").ToString();
+                    var hour = Regex.Match(day_str = day_str.Replace(day + " ", ""), "(.*?)時").ToString();
+                    var minute = Regex.Match(day_str.Replace(hour, ""), "(.*?)分").ToString();
+                    year = year.Replace("年", "");
+                    month = month.Replace("月", "");
+                    day = day.Replace("日", "");
+                    hour = hour.Replace("時", "");
+                    minute = minute.Replace("分", "");
+                    var day_id = new DateTime(int.Parse(year), int.Parse(month), int.Parse(day), int.Parse(hour), int.Parse(minute), 0).ToString("yyyy/MM/dd HH:mm:ss");
+                    var location = tdNodes[1].TextContent;
+                    var mag = tdNodes[2].TextContent;
+                    var max_intensity = tdNodes[3].TextContent;
+                    if (max_intensity == "---")
+                    {
+                        quake_list.Add(new List<string>() { "s_0.png", day_id, $"{location}   M{mag}" });
+                    }
+                    else if (max_intensity == "1")
+                    {
+                        quake_list.Add(new List<string>() { "s_1.png", day_id, $"{location}   M{mag}" });
+                    }
+                    else if (max_intensity == "2")
+                    {
+                        quake_list.Add(new List<string>() { "s_2.png", day_id, $"{location}   M{mag}" });
+                    }
+                    else if (max_intensity == "3")
+                    {
+                        quake_list.Add(new List<string>() { "s_3.png", day_id, $"{location}   M{mag}" });
+                    }
+                    else if (max_intensity == "4")
+                    {
+                        quake_list.Add(new List<string>() { "s_4.png", day_id, $"{location}   M{mag}" });
+                    }
+                    else if (max_intensity == "5弱")
+                    {
+                        quake_list.Add(new List<string>() { "s_5_1.png", day_id, $"{location}   M{mag}" });
+                    }
+                    else if (max_intensity == "5強")
+                    {
+                        quake_list.Add(new List<string>() { "s_5_2.png", day_id, $"{location}   M{mag}" });
+                    }
+                    else if (max_intensity == "6弱")
+                    {
+                        quake_list.Add(new List<string>() { "s_6_1.png", day_id, $"{location}   M{mag}" });
+                    }
+                    else if (max_intensity == "6強")
+                    {
+                        quake_list.Add(new List<string>() { "s_6_2.png", day_id, $"{location}   M{mag}" });
+                    }
+                    else if (max_intensity == "7")
+                    {
+                        quake_list.Add(new List<string>() { "s_7.png", day_id, $"{location}   M{mag}" });
+                    }
                 }
-                else if(max_intensity == "1")
+                catch
                 {
-                    quake_list.Add(new List<string>() { "s_1.png", day_id, $"{location}   M{mag}" });
-                }
-                else if (max_intensity == "2")
-                {
-                    quake_list.Add(new List<string>() { "s_2.png", day_id, $"{location}   M{mag}" });
-                }
-                else if (max_intensity == "3")
-                {
-                    quake_list.Add(new List<string>() { "s_3.png", day_id, $"{location}   M{mag}" });
-                }
-                else if (max_intensity == "4")
-                {
-                    quake_list.Add(new List<string>() { "s_4.png", day_id, $"{location}   M{mag}" });
-                }
-                else if (max_intensity == "5弱")
-                {
-                    quake_list.Add(new List<string>() { "s_5_1.png", day_id, $"{location}   M{mag}" });
-                }
-                else if (max_intensity == "5強")
-                {
-                    quake_list.Add(new List<string>() { "s_5_2.png", day_id, $"{location}   M{mag}" });
-                }
-                else if (max_intensity == "6弱")
-                {
-                    quake_list.Add(new List<string>() { "s_6_1.png", day_id, $"{location}   M{mag}" });
-                }
-                else if (max_intensity == "6強")
-                {
-                    quake_list.Add(new List<string>() { "s_6_2.png", day_id, $"{location}   M{mag}" });
-                }
-                else if (max_intensity == "7")
-                {
-                    quake_list.Add(new List<string>() { "s_7.png", day_id, $"{location}   M{mag}" });
+                    ;
                 }
             }
         }

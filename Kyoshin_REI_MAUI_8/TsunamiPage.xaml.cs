@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Xml;
 
 namespace Kyoshin_REI_MAUI_8;
@@ -49,6 +50,7 @@ public partial class TsunamiPage : ContentPage
                             var name = childNode1["Area"]["Name"].InnerText;
                             var val = childNode1["Category"]["Kind"]["Name"].InnerText;
                             var val_col = "s_null.png";
+                            Debug.WriteLine($"{name} {val}");
                             if(val.Contains("ëÂí√îgåxïÒ"))
                             {
                                 val_col = "purple.png";
@@ -73,9 +75,15 @@ public partial class TsunamiPage : ContentPage
                                     now = now.Replace("+09:00", "").Replace("T", " ").Replace("-", "/") + "ç†ìûíB";
                                 }
                             }
-
-                            var max_height = childNode1["MaxHeight"]["jmx_eb:TsunamiHeight"].Attributes["type"].Value + " " + childNode1["MaxHeight"]["jmx_eb:TsunamiHeight"].Attributes["description"].Value;
-
+                            var max_height = "ìûíBíÜ";
+                            try
+                            {
+                                max_height = childNode1["MaxHeight"]["jmx_eb:TsunamiHeight"].Attributes["type"].Value + " " + childNode1["MaxHeight"]["jmx_eb:TsunamiHeight"].Attributes["description"].Value;
+                            }
+                            catch
+                            {
+                                ;
+                            }
                             tsunami_list.Add(new List<string>() {val_col, $"{name} {val}",$"{now} {max_height}"});
                         }
                     }
