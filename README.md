@@ -1,5 +1,5 @@
-Android 10以上で動作します。
+## 使用ライブラリ
+**[KyoshinMonitorLib](https://github.com/ingen084/KyoshinMonitorLib)**を使用しています。
 
-対応OS:Android
-
-KyoshinMonitorLibを使用しています。
+## 要件
+Android10 以上
