@@ -48,7 +48,6 @@ namespace Kyoshin_REI_MAUI_8
         public static ApiResult<IEnumerable<KyoshinMonitorLib.SkiaImages.ImageAnalysisResult>> result;
         public static string file_path = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "ShindoObsPoints.mpk.lz4");
 
-        static readonly string CHANNEL_ID = "location_notification";
         internal static readonly string COUNT_KEY = "count";
         public static int count = 0;
 
@@ -152,15 +151,15 @@ namespace Kyoshin_REI_MAUI_8
                 Debug.WriteLine("ShindoObsPoints.mpk.lz4の存在を確認");
             }
             TravelTimeTableConverter.ImportData();
-#if ANDROID
+
             Per_req();
             Now_loc();
-#endif
+
             await Task.Delay(1000);
             Geteew();
             GetPoint();
         }
-#if ANDROID
+
         private async void Per_req()
         {
             PermissionStatus status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
@@ -179,7 +178,7 @@ namespace Kyoshin_REI_MAUI_8
                 await Task.Delay(1000);
             }
         }
-#endif
+
         private void Now_button_Clicked(object sender, EventArgs e)
         {
             Geoloc.gettime = Preferences.Default.Get("gettime", -2);
@@ -187,11 +186,11 @@ namespace Kyoshin_REI_MAUI_8
 
         private void Loc_button_click(object sender, EventArgs e)
         {
-#if ANDROID
+
             Now_loc();
-#endif
+
         }
-#if ANDROID
+
         private async void Start_BackService()
         {
             if(Geoloc.back_op)
@@ -205,18 +204,18 @@ namespace Kyoshin_REI_MAUI_8
                 serviceInstance.Stop();
             }
         }
-#endif
+
         private async void Geteew()
         {
             Disp();
-#if ANDROID
+
             Start_BackService();
-#endif
+
             while (true)
             {
                 if(Geoloc.app_window)
                 {
-#if ANDROID
+
                     IEnumerable<ConnectionProfile> profiles = Connectivity.Current.ConnectionProfiles;
 
                     if (profiles.Contains(ConnectionProfile.WiFi))
@@ -227,7 +226,7 @@ namespace Kyoshin_REI_MAUI_8
                     {
                         warning_msg.Text = "モバイル通信を使用中";
                     }
-#endif
+
                     try
                     {
                         using var webApi = new WebApi();
@@ -761,7 +760,7 @@ namespace Kyoshin_REI_MAUI_8
                 await Task.Delay(Geoloc.realtime_in);
             }
         }
-#if ANDROID
+
         private async void Now_loc()
         {
             var request_ = new NotificationRequest
@@ -930,7 +929,7 @@ namespace Kyoshin_REI_MAUI_8
                 LocalNotificationCenter.Current.Show(request_);
             }
         }
-#endif
+
         public static double CalculateDistance(double lat1, double lon1, float lat2, float lon2)
         {
             double radius = 6371;

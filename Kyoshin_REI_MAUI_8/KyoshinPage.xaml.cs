@@ -50,6 +50,11 @@ public partial class KyoshinPage : ContentPage
                     ps_image_ = ImageSource.FromUri(new Uri($"http://www.kmoni.bosai.go.jp/data/map_img/PSWaveImg/eew/{targettime.ToString("yyyyMMdd")}/{targettime.ToString("yyyyMMddHHmmss")}.eew.gif"));
                     fore_image_ = ImageSource.FromUri(new Uri($"http://www.kmoni.bosai.go.jp/data/map_img/EstShindoImg/eew/{targettime.ToString("yyyyMMdd")}/{targettime.ToString("yyyyMMddHHmmss")}.eew.gif"));
                 }
+                else
+                {
+                    ps_image_ = null;
+                    fore_image_ = null;
+                }
 
                 fore_image.Source = fore_image_;
                 quake_image.Source = image_flo;

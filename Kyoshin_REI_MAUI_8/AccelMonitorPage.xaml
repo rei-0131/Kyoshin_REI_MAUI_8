@@ -45,6 +45,7 @@
                    Grid.ColumnSpan="2"/>
 
             <Label Text="震度"
+                   x:Name="sw_t"
                    TextColor="#ffffff"
                    HorizontalOptions="End"
                    Grid.Row="1"
@@ -57,6 +58,7 @@
                     HorizontalOptions="Center"
                     Toggled="intensity_type_Toggled"/>
             <Label Text="計測震度"
+                   x:Name="sw_f"
                    TextColor="#ffffff"
                    HorizontalOptions="Start"
                    Grid.Row="1"

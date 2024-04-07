@@ -85,10 +85,20 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
                         var itemValue3 = 0.0;
                         if (AccelMonitorPage.monitor_type_)
                         {
-                            name = "X";
-                            itemValue = Math.Round(RealTimePage.sum_x, 3);
-                            itemValue2 = Math.Round(RealTimePage.sum_y, 3);
-                            itemValue3 = Math.Round(RealTimePage.sum_z, 3);
+                            if(AccelMonitorPage.intensity_type_)
+                            {
+                                name = "X";
+                                itemValue = Math.Round(RealTimePage.sum_x * 100, 3);
+                                itemValue2 = Math.Round(RealTimePage.sum_y * 100, 3);
+                                itemValue3 = Math.Round(RealTimePage.sum_z * 100, 3);
+                            }
+                            else
+                            {
+                                name = "X";
+                                itemValue = Math.Round(RealTimePage.sum_x, 3);
+                                itemValue2 = Math.Round(RealTimePage.sum_y, 3);
+                                itemValue3 = Math.Round(RealTimePage.sum_z, 3);
+                            }
                             _values.Add(new DateTimePoint(DateTime.Now, itemValue));
                             _values2.Add(new DateTimePoint(DateTime.Now, itemValue2));
                             _values3.Add(new DateTimePoint(DateTime.Now, itemValue3));
@@ -96,8 +106,11 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
                         else
                         {
                             name = "震度";
-                            if(!AccelMonitorPage.intensity_type_)
+                            if(AccelMonitorPage.intensity_type_)
+                                itemValue = RealTimePage.intensity;
+                            else
                             {
+                                itemValue = RealTimePage.intensity;
                                 if (RealTimePage.intensity < 0.5)
                                     itemValue = 0;
                                 else if (RealTimePage.intensity < 1.5)
@@ -119,8 +132,6 @@ namespace Kyoshin_REI_MAUI_8.ViewModels
                                 else if (RealTimePage.intensity >= 6.5)
                                     itemValue = 7;
                             }
-                            else
-                                itemValue = RealTimePage.intensity;
                             _values.Add(new DateTimePoint(DateTime.Now, itemValue));
                             _values2.Add(new DateTimePoint(DateTime.Now, itemValue));
                             _values3.Add(new DateTimePoint(DateTime.Now, itemValue));
