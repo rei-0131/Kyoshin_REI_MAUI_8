@@ -102,7 +102,9 @@ namespace Kyoshin_REI_MAUI_8
             return builder.Build();
         }
     }
-
+    //地震が発生した際、地震速報の通知を受信できない
+    //警報で確認 予報でも確認
+    //デバッグはまだ
     public interface IServiceTest
     {
         void Start();
@@ -195,7 +197,8 @@ namespace Kyoshin_REI_MAUI_8
             try
             {
                 using var webApi = new WebApi();
-                result_eew = await webApi.GetEewInfo(DateTime.Now.AddSeconds(Geoloc.gettime));
+                var targetTime = DateTime.Now.AddSeconds(Geoloc.gettime);
+                result_eew = await webApi.GetEewInfo(targetTime);
                 webApi.Dispose();
 
                 if(result_eew != null && result_eew.Data.Result.Message != "データがありません")
@@ -267,12 +270,23 @@ namespace Kyoshin_REI_MAUI_8
                             else
                                 report_num = "#" + result_eew.Data.ReportNum.Value.ToString();
 
+                            var req_time = "";
+                            try
+                            {
+                                var tmp_data = DateTime.ParseExact(result_eew.Data.RequestTime, "yyyyMMddHHmmss", null).ToString("yyyy/MM/dd HH:mm:ss");
+                                req_time = result_eew.Data.RequestTime;
+                            }
+                            catch
+                            {
+                                req_time = targetTime.ToString("yyyyMMddHHmmss");
+                            }
+
                             var request_ = new NotificationRequest
                             {
                                 NotificationId = 100,
                                 Title = "緊急地震速報が発表されました",
-                                Subtitle = $"{DateTime.ParseExact(result_eew.Data.RequestTime, "yyyyMMddHHmmss", null).ToString("yyyy/MM/dd HH:mm:ss")}",
-                                Description = $"{result_eew.Data.AlertFlag} 第{result_eew.Data.ReportNum}報 {result_eew.Data.RegionName} {result_eew.Data.MagunitudeString}\n予想震度: {jma_str}",
+                                Subtitle = req_time,
+                                Description = $"{result_eew.Data.AlertFlag} 第{result_eew.Data.ReportNum}報 {result_eew.Data.RegionName} {result_eew.Data.Magunitude.Value}\n予想震度: {jma_str}",
                                 CategoryType = NotificationCategoryType.Status,
                                 Android =
                                 {
@@ -311,9 +325,9 @@ namespace Kyoshin_REI_MAUI_8
                     }
                 }
             }
-            catch (Exception)
+            catch
             {
-                /*var request_ = new NotificationRequest
+                var request_ = new NotificationRequest
                 {
                     NotificationId = 101,
                     Title = "緊急地震速報は発表されていません。",
@@ -324,7 +338,7 @@ namespace Kyoshin_REI_MAUI_8
                         ChannelId = "BackGround_None_Notice"
                     }
                 };
-                await LocalNotificationCenter.Current.Show(request_);*/
+                await LocalNotificationCenter.Current.Show(request_);
                 ;
             }
         }

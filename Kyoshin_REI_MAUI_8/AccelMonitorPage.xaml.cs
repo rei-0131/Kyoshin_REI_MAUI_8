@@ -12,13 +12,11 @@ public partial class AccelMonitorPage : ContentPage
 		InitializeComponent();
         if (!monitor_type.IsToggled)
         {
-            intensity_type.IsEnabled = true;
             sw_t.Text = "êkìx";
             sw_f.Text = "åvë™êkìx";
         }
         else
         {
-            intensity_type.IsEnabled = false;
             sw_t.Text = "Gal";
             sw_f.Text = "m/s";
         }
@@ -28,13 +26,11 @@ public partial class AccelMonitorPage : ContentPage
     {
         if (!monitor_type.IsToggled)
         {
-            intensity_type.IsEnabled = true;
             sw_t.Text = "êkìx";
             sw_f.Text = "åvë™êkìx";
         }
         else
         {
-            intensity_type.IsEnabled = false;
             sw_t.Text = "Gal";
             sw_f.Text = "m/s";
         }
