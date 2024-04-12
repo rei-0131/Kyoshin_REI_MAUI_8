@@ -102,9 +102,7 @@ namespace Kyoshin_REI_MAUI_8
             return builder.Build();
         }
     }
-    //地震が発生した際、地震速報の通知を受信できない
-    //警報で確認 予報でも確認
-    //デバッグはまだ
+
     public interface IServiceTest
     {
         void Start();
