@@ -181,7 +181,8 @@ namespace Kyoshin_REI_MAUI_8
 
         private void Now_button_Clicked(object sender, EventArgs e)
         {
-            Geoloc.gettime = Preferences.Default.Get("gettime", -2);
+            Preferences.Default.Set("gettime", -3);
+            Geoloc.gettime = Preferences.Default.Get("gettime", -3);
         }
 
         private void Loc_button_click(object sender, EventArgs e)
