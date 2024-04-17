@@ -27,7 +27,7 @@ public partial class LogPage : ContentPage
         var select = e.SelectedItemIndex;
         try
         {
-            if (Convert.ToInt64((DateTime.Now - DateTime.ParseExact(quake_list[select][1], "yyyy/MM/dd HH:mm:ss", null)).TotalSeconds) < 10800)
+            if (Convert.ToInt64((DateTime.Now - DateTime.ParseExact(quake_list[select][1], "yyyy/MM/dd HH:mm:ss", null)).TotalSeconds) < 86400)
             {
                 Geoloc.gettime = Convert.ToInt32((DateTime.Now - DateTime.ParseExact(quake_list[select][1], "yyyy/MM/dd HH:mm:ss", null)).TotalSeconds) * -1;
                 string text = "地震を再生しました";
@@ -37,7 +37,7 @@ public partial class LogPage : ContentPage
             }
             else
             {
-                string text = "3時間以上前の地震のため再生出来ません";
+                string text = "1日以上前の地震のため再生出来ません";
                 var toast = Toast.Make(text);
                 await toast.Show(cancellationTokenSource.Token);
             }

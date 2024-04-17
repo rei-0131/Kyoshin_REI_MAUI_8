@@ -197,7 +197,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\icon_noti.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiAsset Include="Platforms\Android\Resources\Raw\earlywarning.mp3" />
+	  <ImageAsset Include="Resources\Images\icon_noti.png" />
 	</ItemGroup>
 
 	<ItemGroup>
