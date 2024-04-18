@@ -33,6 +33,10 @@
                 Geoloc.app_window = false;
             };
 
+            window.Backgrounding += (s, e) =>
+            {
+                Geoloc.app_window = false;
+            };
             return window;
         }
     }

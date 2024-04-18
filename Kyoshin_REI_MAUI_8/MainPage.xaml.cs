@@ -187,9 +187,7 @@ namespace Kyoshin_REI_MAUI_8
 
         private void Loc_button_click(object sender, EventArgs e)
         {
-
             Now_loc();
-
         }
 
         private async void Start_BackService()
@@ -258,9 +256,6 @@ namespace Kyoshin_REI_MAUI_8
 
         private async void Disp()
         {
-            //*****最重要*****
-            //*****地震発生時にrequest_eew.Data.RequestTimeの書式がyyyyMMddHHmmssではなく以下の様になる現象を確認
-            //"202404020426%s" (yyyyMMddHHmm%s) request_eew.Data.RequestTimeから参照する際に例外処理を追加*****
             ImageSource bitmap_null = ImageSource.FromFile("s_null.png");
             now_time_date = DateTime.Now;
             targetTime = now_time_date.AddSeconds(Geoloc.gettime);

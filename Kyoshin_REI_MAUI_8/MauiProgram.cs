@@ -1,9 +1,7 @@
-﻿
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-
 using CommunityToolkit.Maui;
 using KyoshinMonitorLib;
 using KyoshinMonitorLib.ApiResult.WebApi;
@@ -68,14 +66,12 @@ namespace Kyoshin_REI_MAUI_8
                             Id = "BackGround_None_Notice",
                             Name = "BackGround_None_Notice",
                             Description = "General",
-                            Sound = "earlywarning"
                         });
                         android.AddChannel(new NotificationChannelRequest
                         {
                             Id = "BackGround_Warning_Notice",
                             Name = "BackGround_Warning_Notice",
                             Description = "Special",
-                            Sound = "earlywarning"
                         });
                         android.AddChannel(new NotificationChannelRequest
                         {
